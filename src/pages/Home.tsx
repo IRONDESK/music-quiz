@@ -35,7 +35,7 @@ function Home() {
         <ArtistBox
           SpotifyID = "3Nrfpe0tUJi4K4DXYWgMUX"
           Name = "방탄소년단"
-          ImageLink = "https://lh3.googleusercontent.com/z2Nx3OKs17IJ72sR8tjk124xgfgGJPw80NeOfO9nAvQ34WFWFwqi-ndFQzQKpdZ4rdnGqBH7c0rVTrcaJF4vTHs"
+          ImageLink = "https://i.scdn.co/image/ab6761610000f17882a5d58059f81867b871d8b6"
         />
         <ArtistBox
           SpotifyID = "3HqSLMAZ3g3d5poNaI7GOU"
@@ -50,7 +50,37 @@ function Home() {
         <ArtistBox
           SpotifyID = "7IrDIIq3j04exsiF3Z7CPg"
           Name = "빈지노"
-          ImageLink = "https://w.namu.la/s/62b35913643bf17e02ba500198edf9c964038bdcc76b8b2d420fee20575404babddc8ec64f81add5a964f5dfe56c2ab3f8a72df68f27f357c4bf263d3828d2c19a4a49f8840092c3be410a39adcba265001eb5e8990751d0a97426267bd6b3ad"
+          ImageLink = "https://i.scdn.co/image/ab6761610000f1784cc1f136d0ec448c918f7e6f"
+        />
+        <ArtistBox
+          SpotifyID = "4muJrGMndyYWqZtfk8OWy4"
+          Name = "보아"
+          ImageLink = "https://i.scdn.co/image/ab6761610000f178206c2ba8d14150ccc634765b"
+        />
+        <ArtistBox
+          SpotifyID = "5snNHNlYT2UrtZo5HCJkiw"
+          Name = "에픽하이"
+          ImageLink = "https://i.scdn.co/image/ab6761610000f1787ab6a76808b6f77f5628d231"
+        />
+        <ArtistBox
+          SpotifyID = "4nvFFLtv7ZqoTr83387uK4"
+          Name = "다이나믹듀오"
+          ImageLink = "https://i.scdn.co/image/ab6761610000e5ebf58590979d60df6fb6d6a837"
+        />
+        <ArtistBox
+          SpotifyID = "7f4ignuCJhLXfZ9giKT7rH"
+          Name = "NCT127"
+          ImageLink = "https://i.scdn.co/image/ab6761670000ecd41cfadde11f891e8889b15e4a"
+        />
+        <ArtistBox
+          SpotifyID = "7jFUYMpMUBDL4JQtMZ5ilc"
+          Name = "성시경"
+          ImageLink = "https://i.scdn.co/image/ab6761610000e5ebb3c06b25c1c87dfcec00877d"
+        />
+        <ArtistBox
+          SpotifyID = "1HY2Jd0NmPuamShAr6KMms"
+          Name = "Lady Gaga"
+          ImageLink = "https://i.scdn.co/image/ab6761610000f178749ba770a33230206f8fe159"
         />
       </ArtistWrap>
 
