@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
-import { PALLETS } from '../constants';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { PALLETS } from '../constants';
 
 import HeaderTitle from '../components/Home/HeaderTitle';
 import ArtistBox from '../components/Home/ArtistBox';
 
 function Home() {
+  const navigate = useNavigate();
   const [selectedArtist, setSelectedArtist] = useState<string>("");
+
   function selectArtist (e: any) {
     const target = e.target.closest('label');
     if (target) {setSelectedArtist(target.dataset.spotifyid);}
+  };
+
+  function goStart() {
+    if (selectedArtist) {
+      navigate('/quiz');
+      localStorage.setItem('artist-id', selectedArtist);
+    } else {
+      window.alert("아티스트를 선택해주세요.");
+    }
   };
 
   return (
@@ -42,7 +54,7 @@ function Home() {
         />
       </ArtistWrap>
 
-      <SubmitButton>
+      <SubmitButton onClick={goStart}>
         시작
       </SubmitButton>
     </Contents>

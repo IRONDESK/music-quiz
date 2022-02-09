@@ -39,7 +39,8 @@ function QuizItem() {
   };
 
   useEffect(() => {
-    getAlbum('3HqSLMAZ3g3d5poNaI7GOU');
+    const targetId:any = localStorage.getItem('artist-id');
+    getAlbum(targetId);
   }, [question]);
 
   const btnClick = () => {
@@ -60,7 +61,7 @@ function QuizItem() {
       <Progress max={quizLength} value={question} />
       {question >= 0 && question < 3 ? (
         <>
-          <ItemImg src={albumImg} />{' '}
+          {albumImg ? <ItemImg src={albumImg} /> : <LoadingImg>Loading...</LoadingImg>}{' '}
           <ItemTxt>문제 Lorem ipsum dolor sit amet.</ItemTxt>
         </>
       ) : null}
@@ -112,6 +113,18 @@ const ItemImg = styled.img`
   height: 300px;
   border-radius: 5px;
   object-fit: cover;
+`;
+
+const LoadingImg = styled.article`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  background-color: ${PALLETS.WHITE};
+  font-size: 24px;
+  color: ${PALLETS.BLACK};
+  opacity: 0.7;
 `;
 
 const ItemTxt = styled.p`
