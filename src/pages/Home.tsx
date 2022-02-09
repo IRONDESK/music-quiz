@@ -13,12 +13,12 @@ function Home() {
   };
 
   return (
-  <HomeWrap>
-    <HomeHeader>
+  <Wrap>
+    <Header>
       <HeaderTitle />
-    </HomeHeader>
+    </Header>
     
-    <HomeMain>
+    <Contents>
       <ArtistWrap onClick={selectArtist}>
         <ArtistBox
           SpotifyID = "3Nrfpe0tUJi4K4DXYWgMUX"
@@ -45,25 +45,23 @@ function Home() {
       <SubmitButton>
         시작
       </SubmitButton>
-    </HomeMain>
+    </Contents>
     
-  </HomeWrap>
+  </Wrap>
   );
 }
 
-const HomeWrap = styled.section`
+const Wrap = styled.section`
   font-family: 'Pretendard';
   height: 100vh;
   background: ${PALLETS.GRAY};
 `;
-const HomeHeader = styled.header`
-  display: flex;
+const Header = styled.header`
   height: 30vh;
-  align-items: flex-end;
   background: ${PALLETS.BLACK};
   color: #fff;
   `;
-const HomeMain = styled.main`
+const Contents = styled.main`
   display: block;
   margin: 10px auto;
   padding: 20px 0;
