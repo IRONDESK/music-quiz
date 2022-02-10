@@ -71,6 +71,7 @@ function QuizItem() {
 
       <BtnWrap>
         <ItemBtn
+          style={{order: Math.ceil(Math.random() * 3)}}
           type="button"
           onClick={() => {
             correctClick();
@@ -79,10 +80,16 @@ function QuizItem() {
         >
           정답
         </ItemBtn>
-        <ItemBtn type="button" onClick={btnClick}>
+        <ItemBtn
+          style={{order: Math.ceil(Math.random() * 3)}}
+          type="button"
+          onClick={btnClick}>
           오답1
         </ItemBtn>
-        <ItemBtn type="button" onClick={btnClick}>
+        <ItemBtn
+          style={{order: Math.ceil(Math.random() * 3)}}
+          type="button"
+          onClick={btnClick}>
           오답2
         </ItemBtn>
       </BtnWrap>
