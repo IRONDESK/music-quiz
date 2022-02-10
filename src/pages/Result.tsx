@@ -6,7 +6,7 @@ import ResultContents from '../components/Result/ResultContents';
 import ShareContents from '../components/Result/ShareContents';
 
 function Result() {
-  const Point = 10;
+  const Point = localStorage.getItem('correct-amount');
   
   return (
   <Wrap>

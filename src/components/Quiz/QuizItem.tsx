@@ -46,6 +46,7 @@ function QuizItem() {
   const btnClick = () => {
     if (question === quizLength - 1) {
       navigate('/result');
+      localStorage.setItem('corret-amount', String(correct));
     } else {
       setQuestion(question + 1);
     }
