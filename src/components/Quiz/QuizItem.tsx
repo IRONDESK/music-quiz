@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ReactAudioPlayer from 'react-audio-player';
 import { PALLETS } from '../../constants';
 
 import axios from 'axios';
@@ -14,9 +15,13 @@ function QuizItem() {
   const [correct, setCorrect] = useState<number>(0);
 
   // 앨범의 수록곡 불러오기
-  const [album, setAlbum] = useState({});
+  const [album, setAlbum] = useState<any>({});
+  const [albumName, setAlbumName] = useState<string>('');
+  const [albumRelease, setAlbumRelease] = useState<string>('');
   const [albumImg, setAlbumImg] = useState('');
   const [musicList, setMusicList] = useState([]);
+  const [ranNumsList, setRanNumsList] = useState<number>(0);
+
   const getAlbum = async (artistId: String) => {
     const access_token = await getAuth();
     const albumId = await getArtistAlbum(artistId);
@@ -29,10 +34,10 @@ function QuizItem() {
         },
       });
       setAlbum(res.data);
+      setAlbumName(res.data.name);
+      setAlbumRelease(res.data.release_date);
       setAlbumImg(res.data.images[0].url);
-      setMusicList(res.data.tracks.items);
-      console.log(typeof res.data.images[0].url);
-      console.log(res.data.images[0].url);
+      setMusicList(res.data.tracks.items);   
     } catch (err) {
       console.log(err);
     }
@@ -56,6 +61,16 @@ function QuizItem() {
     setCorrect(correct + 1);
   };
 
+  const playSong = (e:any) => {
+    setTimeout(() => {
+      e.target.currentTime = 999999;
+    }, 400);
+  };
+
+  useEffect(() => {
+    setRanNumsList(Math.ceil(Math.random()*musicList.length));  
+  }, [question])
+  
   return (
     <ItemWrap>
       <Correct>정답 갯수 : {correct}</Correct>
@@ -67,8 +82,31 @@ function QuizItem() {
         </>
       ) : null}
       {question >= 3 && question < 6 ? <></> : null}
-      {question >= 6 && question < 7 ? <></> : null}
-      {question >= 7 && question < 10 ? <></> : null}
+      {question >= 6 && question < 7 ? (
+      <>
+        {albumImg ? <ItemImg src={albumImg} /> : <LoadingImg>Loading...</LoadingImg>}{' '}
+        <QuizWrap>
+          <AlbumNameTxt>{albumName}</AlbumNameTxt>
+          <ItemTxt>이 앨범의 발매연월은?</ItemTxt>
+        </QuizWrap>
+      </>
+      ) : null}
+      {question >= 7 && question < 10 ? (
+        <>
+        <ReactAudioPlayer
+          style={{width: '140px'}}
+          src={musicList[ranNumsList]['preview_url']}
+          onPlay={playSong}
+          autoPlay={false}
+          controls
+        />
+        <ItemTxt>이 노래의 제목은?
+          {"랜덤숫자" + ranNumsList}<br />
+          {musicList[ranNumsList]['preview_url']}<br />
+          {musicList[ranNumsList]['name']}
+        </ItemTxt>
+        </>
+      ) : null}
 
       <BtnWrap>
         <ItemBtn
@@ -79,19 +117,47 @@ function QuizItem() {
             btnClick();
           }}
         >
-          정답
+          {question >= 6 && question < 7 ? (
+          <>
+          {albumRelease.split("-")[0]+"년 " + Number(albumRelease.split("-")[1]) + "월"}
+          </>
+          ) : null}
+          {question >= 7 && question < 10 ? (
+          <>
+          {musicList[ranNumsList]['name']}
+          </>
+          ) : null}
+          (정답)
         </ItemBtn>
         <ItemBtn
           style={{order: Math.ceil(Math.random() * 3)}}
           type="button"
           onClick={btnClick}>
-          오답1
+          {question >= 6 && question < 7 ? (
+          <>
+          {Number(albumRelease.split("-")[0]) + 1 + "년 " + Number(albumRelease.split("-")[1]) + "월"}
+          </>
+          ) : null}
+          {question >= 7 && question < 10 ? (
+          <>
+          {musicList[(ranNumsList > 0 ? ranNumsList - 1 : ranNumsList + 1)]['name']}
+          </>
+          ) : null}
         </ItemBtn>
         <ItemBtn
           style={{order: Math.ceil(Math.random() * 3)}}
           type="button"
           onClick={btnClick}>
-          오답2
+          {question >= 6 && question < 7 ? (
+          <>
+          {albumRelease.split("-")[0] + "년 " + (Number(albumRelease.split("-")[1]) + 1) + "월"}
+          </>
+          ) : null}
+          {question >= 7 && question < 10 ? (
+          <>
+          {musicList[(ranNumsList > 1 ? ranNumsList - 2 : ranNumsList + 2)]['name']}
+          </>
+          ) : null}
         </ItemBtn>
       </BtnWrap>
     </ItemWrap>
@@ -108,6 +174,7 @@ const ItemWrap = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Pretendard';
 `;
 
 const Correct = styled.p`
@@ -137,6 +204,26 @@ const LoadingImg = styled.article`
 
 const ItemTxt = styled.p`
   color: ${PALLETS.WHITE};
+  font-size: 22px;
+  font-weight: 600;
+`;
+
+const QuizWrap = styled.article`
+  text-align: center;
+`;
+
+const AlbumNameTxt = styled.p`
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 0 10px;
+  background-color: ${PALLETS.BLACK};
+  color: ${PALLETS.WHITE};
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 32px;
+  border: 2px solid ${PALLETS.WHITE};
+  border-radius: 10px;
+  opacity: 0.8;
 `;
 
 const BtnWrap = styled.div`
