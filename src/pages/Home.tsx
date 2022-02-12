@@ -48,11 +48,6 @@ function Home() {
           ImageLink = "https://pbs.twimg.com/media/FBqo7QvVEAI9fJT.jpg"
         />
         <ArtistBox
-          SpotifyID = "7IrDIIq3j04exsiF3Z7CPg"
-          Name = "빈지노"
-          ImageLink = "https://i.scdn.co/image/ab6761610000f1784cc1f136d0ec448c918f7e6f"
-        />
-        <ArtistBox
           SpotifyID = "4muJrGMndyYWqZtfk8OWy4"
           Name = "보아"
           ImageLink = "https://i.scdn.co/image/ab6761610000f178206c2ba8d14150ccc634765b"
@@ -81,6 +76,11 @@ function Home() {
           SpotifyID = "1HY2Jd0NmPuamShAr6KMms"
           Name = "Lady Gaga"
           ImageLink = "https://i.scdn.co/image/ab6761610000f178749ba770a33230206f8fe159"
+        />
+        <ArtistBox
+          SpotifyID = "2hRQKC0gqlZGPrmUKbcchR"
+          Name = "SHINee"
+          ImageLink = "https://i.scdn.co/image/ab67706c0000da84161330f59573a6b5bb402101"
         />
       </ArtistWrap>
 

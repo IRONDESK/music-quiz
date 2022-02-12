@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PALLETS } from '../constants';
 import styled, { keyframes } from 'styled-components';
 
@@ -6,20 +7,30 @@ import ResultContents from '../components/Result/ResultContents';
 import ShareContents from '../components/Result/ShareContents';
 
 function Result() {
-  const Point = localStorage.getItem('correct-amount');
-  
+  const navigate = useNavigate();
+  const myPoint = localStorage.getItem('correct-amount');
+
+  function goHome () {
+    navigate('/');
+  };
+
   return (
   <Wrap>
     <Header>
       <Container>
-        <PointTxt>{Point}</PointTxt>
+        <PointTxt>{myPoint}</PointTxt>
         <>정답 수</>
       </Container>
     </Header>
 
     <ContentsWrap>
-      <ResultContents Point={Point} />
+      <ResultContents />
+
+      <SubmitButton onClick={goHome}>
+          처음으로
+      </SubmitButton>
     </ContentsWrap>
+
 
     <ShareWrap>
       <ShareContents />
@@ -87,6 +98,22 @@ const Footer = styled.footer`
   font-size: 20px;
   color: #888;
   text-align: center;
+`;
+
+const SubmitButton = styled.a`
+  cursor: pointer;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 160px;
+  height: 47px;
+  background-color: ${PALLETS.WHITE};
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.76px;
+  border-radius: 100px;
 `;
 
 export default Result;
