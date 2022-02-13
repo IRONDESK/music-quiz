@@ -8,8 +8,13 @@ const Answer = ({
   setQuestion,
   correct,
   setCorrect,
+  albumName,
+  albumImg,
   albumRelease,
   musicList,
+  otherImg,
+  otherAlbum,
+  otherMusic,
   rand,
 }: any) => {
   const quizLength: number = 10;
@@ -30,9 +35,18 @@ const Answer = ({
 
   const FirstAnswer = () => {
     if (question >= 0 && question < 3) {
-      return <></>;
+      return musicList.length > 0 ? musicList[rand]['name'] : null;
     } else if (question >= 3 && question < 6) {
-      return <></>;
+      return (
+        <>
+          {albumName}
+          {albumImg ? (
+            <AnswerImg src={albumImg} />
+          ) : (
+            <LoadingImg>Loading...</LoadingImg>
+          )}{' '}
+        </>
+      );
     } else if (question >= 6 && question < 7) {
       return (
         albumRelease.split('-')[0] +
@@ -47,9 +61,18 @@ const Answer = ({
 
   const SecondAnswer = () => {
     if (question >= 0 && question < 3) {
-      return <></>;
+      return otherMusic.length > 0 ? otherMusic[0] : null;
     } else if (question >= 3 && question < 6) {
-      return <></>;
+      return (
+        <>
+          {otherAlbum[0]}
+          {otherImg ? (
+            <AnswerImg src={otherImg[0]} />
+          ) : (
+            <LoadingImg>Loading...</LoadingImg>
+          )}{' '}
+        </>
+      );
     } else if (question >= 6 && question < 7) {
       return (
         Number(albumRelease.split('-')[0]) +
@@ -65,9 +88,18 @@ const Answer = ({
 
   const ThirdAnswer = () => {
     if (question >= 0 && question < 3) {
-      return <></>;
+      return otherMusic.length > 0 ? otherMusic[1] : null;
     } else if (question >= 3 && question < 6) {
-      return <></>;
+      return (
+        <>
+          {otherAlbum[1]}
+          {otherImg ? (
+            <AnswerImg src={otherImg[1]} />
+          ) : (
+            <LoadingImg>Loading...</LoadingImg>
+          )}{' '}
+        </>
+      );
     } else if (question >= 6 && question < 7) {
       return (
         albumRelease.split('-')[0] +
@@ -116,6 +148,7 @@ const BtnWrap = styled.div`
 `;
 
 const ItemBtn = styled.button`
+  position: relative;
   cursor: pointer;
   box-sizing: border-box;
   width: 200px;
@@ -127,7 +160,30 @@ const ItemBtn = styled.button`
 
   &:hover {
     background-color: inherit;
-    border: 1px solid ${PALLETS.WHITE};
+    border: 2px solid ${PALLETS.WHITE};
     color: ${PALLETS.WHITE};
   }
+`;
+
+const AnswerImg = styled.img`
+  position: absolute;
+  top: -110px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+`;
+
+const LoadingImg = styled.article`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  background-color: ${PALLETS.WHITE};
+  font-size: 24px;
+  color: ${PALLETS.BLACK};
+  opacity: 0.7;
 `;

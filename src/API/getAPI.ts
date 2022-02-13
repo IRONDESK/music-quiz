@@ -67,5 +67,5 @@ export const getArtistOtherAlbum = async (artistId: string) => {
 
 // 랜덤 값 반환 함수
 const getRandom = (n: number) => {
-  return Math.ceil(Math.random() * n) - 1;
+  return Math.floor(Math.random() * n);
 };

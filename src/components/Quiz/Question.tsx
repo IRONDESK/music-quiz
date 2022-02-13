@@ -18,12 +18,9 @@ const Question = ({ question, albumImg, albumName, musicList, rand }: any) => {
   } else if (question >= 3 && question < 6) {
     return (
       <>
-        {albumImg ? (
-          <ItemImg src={albumImg} />
-        ) : (
-          <LoadingImg>Loading...</LoadingImg>
-        )}{' '}
-        <AlbumNameTxt>{albumName}</AlbumNameTxt>
+        {musicList.length > 0 ? (
+          <AlbumNameTxt>{musicList[rand]['name']}</AlbumNameTxt>
+        ) : null}
         <ItemTxt>이 수록곡이 포함되어 있는 앨범은?</ItemTxt>
       </>
     );

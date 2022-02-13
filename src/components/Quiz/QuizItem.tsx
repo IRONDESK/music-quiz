@@ -39,12 +39,14 @@ function QuizItem() {
     }
   };
 
+  const [otherImg, setOtherImg] = useState<string[]>([]);
   const [otherAlbum, setOtherAlbum] = useState<string[]>([]);
   const [otherMusic, setOtherMusic] = useState<string[]>([]);
 
   const getOtherAlbum = async (artistId: string) => {
     const access_token: string = await getAuth();
     const albumId: any = await getArtistOtherAlbum(artistId);
+    setOtherImg([]);
     setOtherAlbum([]);
     setOtherMusic([]);
 
@@ -56,13 +58,15 @@ function QuizItem() {
             Authorization: `Bearer ${access_token}`,
           },
         });
-        const otherRand =
-          Math.ceil(Math.random() * res.data.tracks.items.length) - 1;
+        const otherRand = Math.floor(
+          Math.random() * res.data.tracks.items.length
+        );
         setOtherMusic((prevArray) => [
           ...prevArray,
           res.data.tracks.items[otherRand].name,
         ]);
         setOtherAlbum((prevArray) => [...prevArray, res.data.name]);
+        setOtherImg((prevArray) => [...prevArray, res.data.images[0].url]);
       } catch (err) {
         console.log(err);
       }
@@ -71,8 +75,7 @@ function QuizItem() {
 
   useEffect(() => {
     const targetId: any = localStorage.getItem('artist-id');
-
-    setRand(Math.ceil(Math.random() * musicList.length) - 1);
+    setRand(Math.floor(Math.random() * musicList.length));
     getAlbum(targetId);
     getOtherAlbum(targetId);
   }, [question]);
@@ -93,8 +96,13 @@ function QuizItem() {
         setQuestion={setQuestion}
         correct={correct}
         setCorrect={setCorrect}
+        albumName={albumName}
+        albumImg={albumImg}
         albumRelease={albumRelease}
         musicList={musicList}
+        otherImg={otherImg}
+        otherAlbum={otherAlbum}
+        otherMusic={otherMusic}
         rand={rand}
       />
     </ItemWrap>
