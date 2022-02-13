@@ -20,17 +20,23 @@ const Answer = ({
   const quizLength: number = 10;
   const navigate = useNavigate();
 
-  const btnClick = () => {
+  const goNextStage = () => {
     if (question === quizLength - 1) {
       navigate('/result');
-      localStorage.setItem('correct-amount', String(correct));
     } else {
       setQuestion(question + 1);
     }
   };
 
-  const correctClick = () => {
+  const NotAnswerClick = () => {
+    localStorage.setItem('correct-amount', String(correct));
+    goNextStage();
+  };
+
+  const AnswerClick = () => {
     setCorrect(correct + 1);
+    localStorage.setItem('correct-amount', String(correct + 1));
+    goNextStage();
   };
 
   const FirstAnswer = () => {
@@ -115,22 +121,19 @@ const Answer = ({
     <BtnWrap>
       <ItemBtn
         style={{ order: Math.ceil(Math.random() * 3) }}
-        onClick={() => {
-          correctClick();
-          btnClick();
-        }}
+        onClick={AnswerClick}
       >
         {FirstAnswer()}(정답)
       </ItemBtn>
       <ItemBtn
         style={{ order: Math.ceil(Math.random() * 3) }}
-        onClick={btnClick}
+        onClick={NotAnswerClick}
       >
         {SecondAnswer()}
       </ItemBtn>
       <ItemBtn
         style={{ order: Math.ceil(Math.random() * 3) }}
-        onClick={btnClick}
+        onClick={NotAnswerClick}
       >
         {ThirdAnswer()}
       </ItemBtn>
