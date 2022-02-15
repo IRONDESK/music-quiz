@@ -5,6 +5,7 @@ import { PALLETS } from '../constants';
 
 import HeaderTitle from '../components/Home/HeaderTitle';
 import ArtistBox from '../components/Home/ArtistBox';
+import Footer from '../components/Layout/Footer';
 
 function Home() {
   const navigate = useNavigate();
@@ -87,15 +88,15 @@ function Home() {
       <SubmitButton onClick={goStart}>
         시작
       </SubmitButton>
+      <Footer />
     </Contents>
-    
   </Wrap>
   );
 }
 
 const Wrap = styled.section`
   font-family: 'Pretendard';
-  height: 100vh;
+  height: 100%;
   background: ${PALLETS.GRAY};
 `;
 const Header = styled.header`
