@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PALLETS } from '../../constants';
 import axios from 'axios';
 
-import { getAuth, getArtistAlbum, getArtistOtherAlbum } from '../../API/getAPI';
+import { getAuth, getArtistAlbum } from '../../API/getAlbumID';
 import Question from './Question';
 import Answer from './Answer';
 
@@ -13,60 +13,25 @@ function QuizItem() {
   const [correct, setCorrect] = useState<number>(0);
 
   // API GET
-  const [albumName, setAlbumName] = useState<string>('');
-  const [albumRelease, setAlbumRelease] = useState<string>('');
-  const [albumImg, setAlbumImg] = useState<string>('');
-  const [musicList, setMusicList] = useState<any>([]);
-  const [rand, setRand] = useState<number>(0);
+  const [data, setData] = useState<any>([]);
+  const [randList, setRandList] = useState<any>([]);
 
   const getAlbum = async (artistId: string) => {
     const access_token: string = await getAuth();
-    const albumId: string = await getArtistAlbum(artistId);
-    const api_url: string = `https://api.spotify.com/v1/albums/${albumId}`;
+    const albumId: any = await getArtistAlbum(artistId);
 
-    try {
-      const res: any = await axios.get(api_url, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-      setAlbumName(res.data.name);
-      setAlbumRelease(res.data.release_date);
-      setAlbumImg(res.data.images[0].url);
-      setMusicList(res.data.tracks.items);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const [otherImg, setOtherImg] = useState<string[]>([]);
-  const [otherAlbum, setOtherAlbum] = useState<string[]>([]);
-  const [otherMusic, setOtherMusic] = useState<string[]>([]);
-
-  const getOtherAlbum = async (artistId: string) => {
-    const access_token: string = await getAuth();
-    const albumId: any = await getArtistOtherAlbum(artistId);
-    setOtherImg([]);
-    setOtherAlbum([]);
-    setOtherMusic([]);
-
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       const api_url: string = `https://api.spotify.com/v1/albums/${albumId[i]}`;
+
       try {
-        const res = await axios.get(api_url, {
+        const res: any = await axios.get(api_url, {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
         });
-        const otherRand = Math.floor(
-          Math.random() * res.data.tracks.items.length
-        );
-        setOtherMusic((prevArray) => [
-          ...prevArray,
-          res.data.tracks.items[otherRand].name,
-        ]);
-        setOtherAlbum((prevArray) => [...prevArray, res.data.name]);
-        setOtherImg((prevArray) => [...prevArray, res.data.images[0].url]);
+        const rand = Math.floor(Math.random() * res.data.tracks.items.length);
+        setData((prevArray: any) => [...prevArray, res.data]);
+        setRandList((prevArray: any) => [...prevArray, rand]);
       } catch (err) {
         console.log(err);
       }
@@ -75,38 +40,28 @@ function QuizItem() {
 
   useEffect(() => {
     const targetId: any = localStorage.getItem('artist-id');
-    setRand(Math.floor(Math.random() * musicList.length));
     getAlbum(targetId);
-    getOtherAlbum(targetId);
-  }, [question]);
+  }, []);
 
-  return (
-    <ItemWrap>
-      <Correct>정답 갯수 : {correct}</Correct>
-      <Progress max={quizLength} value={question} />
-      <Question
-        question={question}
-        albumImg={albumImg}
-        albumName={albumName}
-        musicList={musicList}
-        rand={rand}
-      />
-      <Answer
-        question={question}
-        setQuestion={setQuestion}
-        correct={correct}
-        setCorrect={setCorrect}
-        albumName={albumName}
-        albumImg={albumImg}
-        albumRelease={albumRelease}
-        musicList={musicList}
-        otherImg={otherImg}
-        otherAlbum={otherAlbum}
-        otherMusic={otherMusic}
-        rand={rand}
-      />
-    </ItemWrap>
-  );
+  if (data.length === 3) {
+    return (
+      <ItemWrap>
+        <Correct>정답 갯수 : {correct}</Correct>
+        <Progress max={quizLength} value={question} />
+        <Question question={question} data={data} randList={randList} />
+        <Answer
+          question={question}
+          setQuestion={setQuestion}
+          correct={correct}
+          setCorrect={setCorrect}
+          data={data}
+          randList={randList}
+        />
+      </ItemWrap>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default QuizItem;

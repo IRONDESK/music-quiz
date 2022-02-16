@@ -3,37 +3,29 @@ import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
 import { PALLETS } from '../../constants';
 
-const Question = ({ question, albumImg, albumName, musicList, rand }: any) => {
+const Question = ({ question, data, randList }: any) => {
   if (question >= 0 && question < 3) {
     return (
       <>
-        {albumImg ? (
-          <ItemImg src={albumImg} />
-        ) : (
-          <LoadingImg>Loading...</LoadingImg>
-        )}{' '}
+        <ItemImg src={data[question % 3].images[0].url} />
         <ItemTxt>이 앨범에 포함되어 있는 수록곡은?</ItemTxt>
       </>
     );
   } else if (question >= 3 && question < 6) {
     return (
       <>
-        {musicList.length > 0 ? (
-          <AlbumNameTxt>{musicList[rand]['name']}</AlbumNameTxt>
-        ) : null}
+        <AlbumNameTxt>
+          {data[question % 3].tracks.items[randList[question % 3]].name}
+        </AlbumNameTxt>
         <ItemTxt>이 수록곡이 포함되어 있는 앨범은?</ItemTxt>
       </>
     );
   } else if (question >= 6 && question < 7) {
     return (
       <>
-        {albumImg ? (
-          <ItemImg src={albumImg} />
-        ) : (
-          <LoadingImg>Loading...</LoadingImg>
-        )}{' '}
+        <ItemImg src={data[0].images[0].url} />
         <QuizWrap>
-          <AlbumNameTxt>{albumName}</AlbumNameTxt>
+          <AlbumNameTxt>{data[0].name}</AlbumNameTxt>
           <ItemTxt>이 앨범의 발매연월은?</ItemTxt>
         </QuizWrap>
       </>
@@ -43,19 +35,14 @@ const Question = ({ question, albumImg, albumName, musicList, rand }: any) => {
       <>
         <ReactAudioPlayer
           style={{ width: '140px' }}
-          src={musicList[rand]['preview_url']}
+          src={
+            data[question % 3].tracks.items[randList[question % 3]].preview_url
+          }
           onPlay={playSong}
           autoPlay={false}
           controls
         />
-        <ItemTxt>
-          이 노래의 제목은?
-          {'랜덤숫자' + rand}
-          <br />
-          {musicList[rand]['preview_url']}
-          <br />
-          {musicList[rand]['name']}
-        </ItemTxt>
+        <ItemTxt>이 노래의 제목은?</ItemTxt>
       </>
     );
   }
@@ -74,18 +61,6 @@ const ItemImg = styled.img`
   height: 300px;
   border-radius: 5px;
   object-fit: cover;
-`;
-
-const LoadingImg = styled.article`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 300px;
-  background-color: ${PALLETS.WHITE};
-  font-size: 24px;
-  color: ${PALLETS.BLACK};
-  opacity: 0.7;
 `;
 
 const ItemTxt = styled.p`

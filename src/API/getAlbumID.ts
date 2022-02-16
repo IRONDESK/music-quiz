@@ -37,28 +37,11 @@ export const getArtistAlbum = async (artistId: string) => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    const rand: number = getRandom(res.data.items.length);
-    return res.data.items[rand].id;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-// 가수의 다른 앨범 id 불러오기 (문제 출제용)
-export const getArtistOtherAlbum = async (artistId: string) => {
-  const access_token: string = await getAuth();
-  const api_url: string = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album`;
-
-  try {
-    const res = await axios.get(api_url, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-    const rand: number = getRandom(res.data.items.length);
+    // 랜덤 값 겹침 현상 해결해야함
     return [
-      res.data.items[rand].id,
-      res.data.items[rand > 0 ? rand - 1 : rand + 1].id,
+      res.data.items[getRandom(res.data.items.length)].id,
+      res.data.items[getRandom(res.data.items.length)].id,
+      res.data.items[getRandom(res.data.items.length)].id,
     ];
   } catch (err) {
     console.log(err);
