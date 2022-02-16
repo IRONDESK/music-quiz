@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components';
 
 import ResultContents from '../components/Result/ResultContents';
 import ShareContents from '../components/Result/ShareContents';
+import Footer from '../components/Layout/Footer';
 
 function Result() {
   const navigate = useNavigate();
@@ -36,9 +37,9 @@ function Result() {
       <ShareContents />
     </ShareWrap>
 
-    <Footer>
-      제작
-    </Footer>
+    <FooterWrap>
+      <Footer />
+    </FooterWrap>
   </Wrap>
   );
 }
@@ -87,17 +88,11 @@ const ShareWrap = styled.section`
   margin-top: 50px;
   width: 768px;
   text-align: center;
-  `;
-const Footer = styled.footer`
-  position: absolute;
-  margin: 35px auto;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
+`;
+
+const FooterWrap = styled.div`
+  margin: 0 auto;
   width: 768px;
-  font-size: 20px;
-  color: #888;
-  text-align: center;
 `;
 
 const SubmitButton = styled.a`
