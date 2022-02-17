@@ -43,7 +43,7 @@ const Answer = ({
   };
 
   const FirstAnswer = () => {
-    if (question >= 0 && question < 3) {
+    if (question && question >= 0 && question < 3) {
       return data[question % 3].tracks.items[randList[question % 3]].name;
     } else if (question >= 3 && question < 6) {
       return (
@@ -66,7 +66,7 @@ const Answer = ({
 
   const SecondAnswer = () => {
     function qType1() {
-      if (!question && (question % 3 === 0)) {
+      if (question % 3 === 0) {
         return (data[1].tracks.items[randList[question % 3]].name);
       } else if (question % 3 === 1) {
         return (data[2].tracks.items[randList[question % 3]].name);
@@ -82,21 +82,21 @@ const Answer = ({
         return (
           <>
           <AnswerImg src={data[1].images[0].url} />
-          {data[1].name};
+          {data[1].name}
           </>
           );
       } else if (question % 3 === 1) {
         return (
           <>
           <AnswerImg src={data[2].images[0].url} />
-          {data[2].name};
+          {data[2].name}
           </>
           );
       } else if (question % 3 === 2) {
         return (
           <>
           <AnswerImg src={data[0].images[0].url} />
-          {data[0].name};
+          {data[0].name}
           </>
           );
       } else {
@@ -139,8 +139,8 @@ const Answer = ({
 
   const ThirdAnswer = () => {
     function qType1() {
-      if (!question && (question % 3 === 0)) {
-        return (data[2].tracks.items[randList[1]].name);
+      if (question % 3 === 0) {
+        return (data[2].tracks.items[randList[question % 3]].name);
       } else if (question % 3 === 1) {
         return (data[0].tracks.items[randList[question % 3]].name);
       } else if (question % 3 === 2) {
@@ -155,21 +155,21 @@ const Answer = ({
         return (
           <>
           <AnswerImg src={data[2].images[0].url} />
-          {data[2].name};
+          {data[2].name}
           </>
           );
       } else if (question % 3 === 1) {
         return (
           <>
           <AnswerImg src={data[0].images[0].url} />
-          {data[0].name};
+          {data[0].name}
           </>
           );
       } else if (question % 3 === 2) {
         return (
           <>
           <AnswerImg src={data[1].images[0].url} />
-          {data[1].name};
+          {data[1].name}
           </>
           );
       } else {
@@ -243,30 +243,36 @@ const BtnWrap = styled.div`
 `;
 
 const ItemBtn = styled.button`
-  position: relative;
   cursor: pointer;
-  box-sizing: border-box;
-  width: 200px;
-  height: 40px;
-  border: none;
+  position: relative;
+  margin: 0 12px;
+  padding: 0 7px;
+  height: 50px;
+  flex: 1;
   background-color: ${PALLETS.WHITE};
+  font-size: 19px;
+  font-weight: 500;
+  font-family: 'Pretendard';
+  border: none;
   border-radius: 200px;
+  box-sizing: border-box;
   transition: all 0.3s;
-
   &:hover {
-    background-color: inherit;
-    border: 2px solid ${PALLETS.WHITE};
-    color: ${PALLETS.WHITE};
+    background-color: ${PALLETS.GREEN};
+    color: ${PALLETS.BLACK};
+    img {
+      border: 5px solid ${PALLETS.GREEN};
+    }
   }
 `;
 
 const AnswerImg = styled.img`
   position: absolute;
-  top: -110px;
+  top: 0;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -115px);
   width: 100px;
   height: 100px;
   border-radius: 5px;
-  object-fit: cover;
+  box-sizing: border-box;
 `;
