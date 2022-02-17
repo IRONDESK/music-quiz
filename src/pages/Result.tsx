@@ -24,13 +24,13 @@ function Result() {
       </Container>
     </Header>
 
-    <ContentsWrap>
+    <Contents>
       <ResultContents />
 
       <SubmitButton onClick={goHome}>
           처음으로
       </SubmitButton>
-    </ContentsWrap>
+    </Contents>
 
 
     <ShareWrap>
@@ -77,10 +77,10 @@ const PointTxt = styled.span`
   font-weight: 700;
   animation: ${sizeUp} .9s forwards;
 `;
-const ContentsWrap = styled.main`
+const Contents = styled.main`
   display: block;
-  margin: 10px auto;
-  padding: 20px 0;
+  margin: 0 auto;
+  padding: 25px 0;
   width: 768px;
 `;
 const ShareWrap = styled.section`

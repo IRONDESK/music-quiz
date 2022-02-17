@@ -37,12 +37,13 @@ export const getArtistAlbum = async (artistId: string) => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    // 랜덤 값 겹침 현상 해결해야함
-    return [
-      res.data.items[getRandom(res.data.items.length)].id,
-      res.data.items[getRandom(res.data.items.length)].id,
-      res.data.items[getRandom(res.data.items.length)].id,
-    ];
+    let targetArray:any = [];
+    while (targetArray.length < 3) {
+      targetArray.push(res.data.items[getRandom(res.data.items.length)].id);
+      let set:any = new Set(targetArray);
+      targetArray = [...set];
+    };
+    return await targetArray;
   } catch (err) {
     console.log(err);
   }

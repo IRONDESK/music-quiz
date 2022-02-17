@@ -106,8 +106,8 @@ const Header = styled.header`
   `;
 const Contents = styled.main`
   display: block;
-  margin: 10px auto;
-  padding: 20px 0;
+  margin: 0 auto;
+  padding: 25px 0;
   width: 768px;
 `;
 const ArtistWrap = styled.article`
