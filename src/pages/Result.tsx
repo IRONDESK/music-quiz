@@ -25,16 +25,10 @@ function Result() {
     </Header>
     <Contents>
       <ResultContents />
-
-
       <SubmitButton onClick={goHome}>
           처음으로
       </SubmitButton>
-      
     </Contents>
-      <ShareWrap>
-        <ShareContents />
-      </ShareWrap>
     <FooterWrap>
       <ShareContents />
       <Footer />
