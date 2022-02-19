@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { PALLETS } from '../../constants';
+import { PALLETS, WIDTH } from '../../constants';
 import axios from 'axios';
 
 import { getAuth, getArtistAlbum } from '../../API/getAlbumID';
@@ -86,6 +86,9 @@ const ItemWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   font-family: 'Pretendard';
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    height: 660px;
+  }
 `;
 
 const Correct = styled.p`
@@ -100,6 +103,10 @@ const Progress = styled.progress`
   width: 500px;
   height: 17px;
   -webkit-appearance: none;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 100%;
+    padding: 0 30px;
+  }
   
   ::-webkit-progress-bar {
     background-color: ${PALLETS.WHITE};

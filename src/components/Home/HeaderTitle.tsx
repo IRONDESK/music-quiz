@@ -1,5 +1,5 @@
 import React from 'react';
-import { PALLETS } from '../../constants';
+import { WIDTH } from '../../constants';
 import styled, { keyframes } from 'styled-components';
 
 function HeaderTitle() {
@@ -39,6 +39,11 @@ const Wrap = styled.header`
     width: 768px;
     height: 30vh;
     color: #fff;
+    @media screen and (max-width: ${WIDTH.TAB}) {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
 `;
 const MainMsg = styled.h1`
     display: block;

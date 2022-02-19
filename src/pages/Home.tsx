@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PALLETS } from '../constants';
+import { PALLETS, WIDTH } from '../constants';
 
 import HeaderTitle from '../components/Home/HeaderTitle';
 import ArtistBox from '../components/Home/ArtistBox';
@@ -105,10 +105,12 @@ function Home() {
         />
       </ArtistWrap>
 
-      <SubmitButton onClick={goStart}>
-        시작
-      </SubmitButton>
-      <Footer />
+      <MobileWrap>
+        <SubmitButton onClick={goStart}>
+          시작
+        </SubmitButton>
+        <Footer />
+      </MobileWrap>
     </Contents>
   </Wrap>
   );
@@ -117,7 +119,7 @@ function Home() {
 const Wrap = styled.section`
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background: ${PALLETS.GRAY};
   font-family: 'Pretendard';
 `;
@@ -145,12 +147,30 @@ const Contents = styled.main`
   margin: 0 auto;
   padding: 25px 0;
   width: 768px;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 100%;
+  }
 `;
 const ArtistWrap = styled.article`
   display: grid;
   margin-bottom: 50px;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  @media screen and (max-width: ${WIDTH.MID}) {
+    padding: 0 50px;
+    padding-bottom: 140px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+const MobileWrap = styled.div`
+  width: 100%;
+  @media screen and (max-width: ${WIDTH.MID}) {
+    position: fixed;
+    padding-top: 20px;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(30,30,30,0) 0%, rgba(30,30,30,0.8) 20%, rgba(30,30,30,1) 60%);
+  }
 `;
 const SubmitButton = styled.a`
   cursor: pointer;

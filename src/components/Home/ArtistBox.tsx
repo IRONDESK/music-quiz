@@ -1,5 +1,5 @@
 import React from 'react';
-import { PALLETS } from '../../constants';
+import { PALLETS, WIDTH } from '../../constants';
 import styled from 'styled-components';
 
 type ItemProps = {
@@ -51,6 +51,9 @@ const ArtistName = styled.span`
     line-height: 26px;
     word-break: keep-all;
     color: ${PALLETS.WHITE};
+    @media screen and (max-width: ${WIDTH.MID}) {
+        font-size: 22px;
+    }
 `;
 
 export default ArtistBox;
