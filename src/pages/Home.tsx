@@ -12,10 +12,12 @@ function Home() {
   const [selectedArtist, setSelectedArtist] = useState<string>("");
   const [modalControl, setModalControl] = useState<boolean>(false);
 
-  function selectArtist (e: any) {
+  function selectArtist(e: any) {
     const target = e.target.closest('label');
-    if (target) {setSelectedArtist(target.dataset.spotifyid);}
-  };
+    if (target) {
+      setSelectedArtist(target.dataset.spotifyid);
+    }
+  }
 
   function goStart() {
     if (selectedArtist) {
@@ -24,7 +26,7 @@ function Home() {
     } else {
       setModalControl(true);
     }
-  };
+  }
 
   function setClose() {
     setModalControl(false);
@@ -104,7 +106,6 @@ function Home() {
           ImageLink = "https://i.scdn.co/image/ab67616d00001e0217ac1b81f7ed7da5d1ad98db"
         />
       </ArtistWrap>
-
       <MobileWrap>
         <SubmitButton onClick={goStart}>
           시작
@@ -141,7 +142,7 @@ const Header = styled.header`
   height: 30vh;
   background: ${PALLETS.BLACK};
   color: #fff;
-  `;
+`;
 const Contents = styled.main`
   display: block;
   margin: 0 auto;

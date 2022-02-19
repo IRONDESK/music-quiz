@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PALLETS, WIDTH } from '../constants';
 import styled, { keyframes } from 'styled-components';
@@ -11,9 +11,9 @@ function Result() {
   const navigate = useNavigate();
   const myPoint = localStorage.getItem('correct-amount');
 
-  function goHome () {
+  function goHome() {
     navigate('/');
-  };
+  }
 
   return (
   <Wrap>
@@ -23,7 +23,6 @@ function Result() {
         <>정답 수</>
       </HeaderWrap>
     </Header>
-
     <Contents>
       <ResultContents />
 
@@ -33,8 +32,9 @@ function Result() {
       </SubmitButton>
       
     </Contents>
-
-
+      <ShareWrap>
+        <ShareContents />
+      </ShareWrap>
     <FooterWrap>
       <ShareContents />
       <Footer />
