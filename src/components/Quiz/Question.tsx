@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
-import { PALLETS } from '../../constants';
+import { PALLETS, WIDTH } from '../../constants';
 
 const Question = ({ question, data, randList }: any) => {
   if (question >= 0 && question < 3) {

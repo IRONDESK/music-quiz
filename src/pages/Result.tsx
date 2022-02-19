@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PALLETS } from '../constants';
+import { PALLETS, WIDTH } from '../constants';
 import styled, { keyframes } from 'styled-components';
 
 import ResultContents from '../components/Result/ResultContents';
@@ -16,80 +16,81 @@ function Result() {
   }
 
   return (
-    <Wrap>
-      <Header>
-        <Container>
-          <PointTxt>{myPoint}</PointTxt>
-          <>정답 수</>
-        </Container>
-      </Header>
+  <Wrap>
+    <Header>
+      <HeaderWrap>
+        <PointTxt>{myPoint}</PointTxt>
+        <>정답 수</>
+      </HeaderWrap>
+    </Header>
     <Contents>
       <ResultContents />
-
       <SubmitButton onClick={goHome}>
           처음으로
       </SubmitButton>
     </Contents>
-      <ShareWrap>
-        <ShareContents />
-      </ShareWrap>
-
-      <FooterWrap>
-        <Footer />
-      </FooterWrap>
-    </Wrap>
+    <FooterWrap>
+      <ShareContents />
+      <Footer />
+    </FooterWrap>
+  </Wrap>
   );
 }
 
 // animation
 const sizeUp = keyframes`
     0% { font-size: 16px };
-    100% { font-size: 100px };
+    100% { font-size: 90px };
 `;
 
 const Wrap = styled.section`
-  position: relative;
   font-family: 'Pretendard';
-  height: 100vh;
-  background: ${PALLETS.GRAY};
 `;
 const Header = styled.header`
-  height: 30vh;
-  background: ${PALLETS.BLACK};
-  color: #fff;
+  height: 20vh;
+  background: ${PALLETS.GREEN};
 `;
-const Container = styled.section`
+const HeaderWrap = styled.section`
   display: flex;
+  margin: 0 auto; 
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
   width: 768px;
-  height: 30vh;
-  color: #fff;
+  height: 20vh;
+  color: ${PALLETS.BLACK};
+  font-size: 19px;
   text-align: center;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 100%;
+  }
 `;
 const PointTxt = styled.span`
   display: block;
   margin: 10px 0;
   font-weight: 700;
-  animation: ${sizeUp} 0.9s forwards;
+  animation: ${sizeUp} .8s forwards;
 `;
 const Contents = styled.main`
   display: block;
   margin: 0 auto;
   padding: 25px 0;
   width: 768px;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 100%;
+    padding: 25px 20px 60px 20px;
+    box-sizing: border-box;
+  }
 `;
-const ShareWrap = styled.section`
-  margin: 0 auto;
-  margin-top: 50px;
+const FooterWrap = styled.section`
+  position: fixed;
   width: 768px;
+  bottom: 0;
+  left: 50%;
+  padding-top: 20px;
   text-align: center;
-`;
+  background: linear-gradient(180deg, rgba(30,30,30,0) 0%, rgba(30,30,30,0.8) 20%, rgba(30,30,30,1) 60%);
+  transform: translateX(-50%);
 
-const FooterWrap = styled.div`
-  margin: 0 auto;
-  width: 768px;
 `;
 
 const SubmitButton = styled.a`
@@ -102,10 +103,15 @@ const SubmitButton = styled.a`
   background-color: ${PALLETS.WHITE};
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 1.76px;
-  border-radius: 100px;
+  border-radius: 200px;
+  transition: background-color .3s;
+
+  &:hover {
+    background-color: ${PALLETS.GREEN};
+  }
 `;
 
 export default Result;

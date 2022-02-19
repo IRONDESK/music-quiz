@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { PALLETS } from '../../constants';
+import { PALLETS, WIDTH } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 
 type props = {
@@ -212,19 +212,25 @@ const Answer = ({
   return (
     <BtnWrap>
       <ItemBtn
-        style={{ order: Math.ceil(Math.random() * 3) }}
+        style={{
+          order: Math.ceil(Math.random() * 3),
+          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
         onClick={AnswerClick}
       >
         {FirstAnswer()}(정답)
       </ItemBtn>
       <ItemBtn
-        style={{ order: Math.ceil(Math.random() * 3) }}
+        style={{
+          order: Math.ceil(Math.random() * 3),
+          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
         onClick={NotAnswerClick}
       >
         {SecondAnswer()}
       </ItemBtn>
       <ItemBtn
-        style={{ order: Math.ceil(Math.random() * 3) }}
+        style={{
+          order: Math.ceil(Math.random() * 3),
+          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
         onClick={NotAnswerClick}
       >
         {ThirdAnswer()}
@@ -240,6 +246,12 @@ const BtnWrap = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+  }
 `;
 
 const ItemBtn = styled.button`
@@ -263,6 +275,16 @@ const ItemBtn = styled.button`
     img {
       border: 5px solid ${PALLETS.GREEN};
     }
+  }
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    flex: none;
+    &:hover {
+      background-color: ${PALLETS.WHITE};
+      color: inherit;
+      img {
+        border: none;
+      }
+    };
   }
 `;
 

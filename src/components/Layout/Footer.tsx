@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { PALLETS, WIDTH } from '../../constants';
 import Advertisement from './Advertisement';
 
 function Footer() {
@@ -20,11 +20,13 @@ function Footer() {
 }
 
 const Wrap = styled.footer`
-  margin: 35px 0;
-  width: 768px;
-  font-size: 16px;
-  color: #888;
-  text-align: center;
+    margin: 35px 0;
+    width: 768px;
+    font-size: 16px;
+    color: #888;
+    @media screen and (max-width: ${WIDTH.TAB}) {
+        width: 100%;
+    }
 `;
 const Powered = styled.p`
   display: flex;
