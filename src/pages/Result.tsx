@@ -23,13 +23,13 @@ function Result() {
           <>정답 수</>
         </Container>
       </Header>
+    <Contents>
+      <ResultContents />
 
-      <ContentsWrap>
-        <ResultContents />
-
-        <SubmitButton onClick={goHome}>처음으로</SubmitButton>
-      </ContentsWrap>
-
+      <SubmitButton onClick={goHome}>
+          처음으로
+      </SubmitButton>
+    </Contents>
       <ShareWrap>
         <ShareContents />
       </ShareWrap>
@@ -74,10 +74,10 @@ const PointTxt = styled.span`
   font-weight: 700;
   animation: ${sizeUp} 0.9s forwards;
 `;
-const ContentsWrap = styled.main`
+const Contents = styled.main`
   display: block;
-  margin: 10px auto;
-  padding: 20px 0;
+  margin: 0 auto;
+  padding: 25px 0;
   width: 768px;
 `;
 const ShareWrap = styled.section`

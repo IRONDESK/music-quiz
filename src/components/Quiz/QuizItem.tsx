@@ -15,6 +15,7 @@ function QuizItem() {
   // API GET
   const [data, setData] = useState<any>([]);
   const [randList, setRandList] = useState<any>([]);
+  const [trackLength, setTrackLength] = useState(0);
 
   const getAlbum = async (artistId: string) => {
     const access_token: string = await getAuth();
@@ -29,24 +30,34 @@ function QuizItem() {
             Authorization: `Bearer ${access_token}`,
           },
         });
-        const rand = Math.floor(Math.random() * res.data.tracks.items.length);
+        // const rand = Math.floor(Math.random() * res.data.tracks.items.length);
+        setTrackLength(res.data.tracks.items.length);
         setData((prevArray: any) => [...prevArray, res.data]);
-        setRandList((prevArray: any) => [...prevArray, rand]);
+        // setRandList((prevArray: any) => [...prevArray, rand]);
       } catch (err) {
         console.log(err);
       }
     }
   };
 
+  let targetArray:any = [];
+  useEffect(() => {
+    while (targetArray.length < 3) {
+      targetArray.push(Math.floor(Math.random() * trackLength));
+      let set:any = new Set(targetArray);
+      setRandList( [...set]);
+    };
+  }, [data]);  
+
   useEffect(() => {
     const targetId: any = localStorage.getItem('artist-id');
     getAlbum(targetId);
   }, []);
 
-  if (data.length === 3) {
+  if (data && data.length === 3) {
     return (
       <ItemWrap>
-        <Correct>정답 갯수 : {correct}</Correct>
+        <Correct>{correct ? "Correct " + correct : null }</Correct>
         <Progress max={quizLength} value={question} />
         <Question question={question} data={data} randList={randList} />
         <Answer
@@ -78,22 +89,26 @@ const ItemWrap = styled.div`
 `;
 
 const Correct = styled.p`
-  color: ${PALLETS.WHITE};
   position: absolute;
   top: -50px;
+  color: ${PALLETS.GREEN};
+  font-size: 21px;
+  font-weight: 500;
 `;
 
 const Progress = styled.progress`
   width: 500px;
-  height: 10px;
+  height: 17px;
   -webkit-appearance: none;
-
+  
   ::-webkit-progress-bar {
     background-color: ${PALLETS.WHITE};
+    border-radius: 20px;
   }
-
+  
   ::-webkit-progress-value {
-    background-color: rgba(255, 0, 0, 0.8);
-    transition: all 0.5s;
+    background-color: ${PALLETS.GREEN};
+    border-radius: 20px;
+    transition: all 0.3s;
   }
 `;

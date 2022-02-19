@@ -7,25 +7,30 @@ const Question = ({ question, data, randList }: any) => {
   if (question >= 0 && question < 3) {
     return (
       <>
-        <ItemImg src={data[question % 3].images[0].url} />
+        <AlbumWrap>
+          <AlbumNameTxt>{data[question % 3].name}</AlbumNameTxt>
+          <AlbumImg src={data[question % 3].images[0].url} />
+        </AlbumWrap>
         <ItemTxt>이 앨범에 포함되어 있는 수록곡은?</ItemTxt>
       </>
     );
   } else if (question >= 3 && question < 6) {
     return (
       <>
-        <AlbumNameTxt>
-          {data[question % 3].tracks.items[randList[question % 3]].name}
-        </AlbumNameTxt>
-        <ItemTxt>이 수록곡이 포함되어 있는 앨범은?</ItemTxt>
+        <ItemTxt>
+          <big>{data[question % 3].tracks.items[randList[question % 3]].name}</big><br />
+          이 수록곡이 포함되어 있는 앨범은?
+        </ItemTxt>
       </>
     );
   } else if (question >= 6 && question < 7) {
     return (
       <>
-        <ItemImg src={data[0].images[0].url} />
-        <QuizWrap>
+        <AlbumWrap>
           <AlbumNameTxt>{data[0].name}</AlbumNameTxt>
+          <AlbumImg src={data[0].images[0].url} />
+        </AlbumWrap>
+        <QuizWrap>
           <ItemTxt>이 앨범의 발매연월은?</ItemTxt>
         </QuizWrap>
       </>
@@ -50,39 +55,57 @@ const Question = ({ question, data, randList }: any) => {
 
 const playSong = (e: any) => {
   setTimeout(() => {
-    e.target.currentTime = 999999;
-  }, 400);
+    e.target.currentTime = 9999999;
+  }, 380);
 };
 
 export default Question;
 
-const ItemImg = styled.img`
+const AlbumWrap = styled.div`
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+`;
+
+const AlbumImg = styled.img`
   width: 300px;
   height: 300px;
   border-radius: 5px;
   object-fit: cover;
 `;
+const AlbumNameTxt = styled.p`
+  position: absolute;
+  display: flex;
+  padding: 15px 8px;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,1) 100%);
+  color: ${PALLETS.WHITE};
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  box-sizing: border-box;
+`;
+
 
 const ItemTxt = styled.p`
+  margin-bottom: 12px;
   color: ${PALLETS.WHITE};
   font-size: 22px;
   font-weight: 600;
+  text-align: center;
+  line-height: 38px;
+  big {
+    font-size: 34px;
+  }
 `;
 
 const QuizWrap = styled.article`
   text-align: center;
-`;
-
-const AlbumNameTxt = styled.p`
-  display: inline-block;
-  margin-bottom: 12px;
-  padding: 0 10px;
-  background-color: ${PALLETS.BLACK};
-  color: ${PALLETS.WHITE};
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 32px;
-  border: 2px solid ${PALLETS.WHITE};
-  border-radius: 10px;
-  opacity: 0.8;
 `;

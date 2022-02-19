@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PALLETS } from '../../constants';
 import { useNavigate } from 'react-router-dom';
@@ -43,7 +43,7 @@ const Answer = ({
   };
 
   const FirstAnswer = () => {
-    if (question >= 0 && question < 3) {
+    if (question && question >= 0 && question < 3) {
       return data[question % 3].tracks.items[randList[question % 3]].name;
     } else if (question >= 3 && question < 6) {
       return (
@@ -56,7 +56,7 @@ const Answer = ({
       return (
         data[0].release_date.split('-')[0] +
         '년 ' +
-        data[0].release_date.split('-')[1] +
+        Number(data[0].release_date.split('-')[1]) +
         '월'
       );
     } else {
@@ -64,58 +64,150 @@ const Answer = ({
     }
   };
 
-  // const SecondAnswer = () => {
-  //   if (question >= 0 && question < 3) {
-  //     return otherMusic.length > 0 ? otherMusic[0] : null;
-  //   } else if (question >= 3 && question < 6) {
-  //     return (
-  //       <>
-  //         {otherAlbum[0]}
-  //         {otherImg ? (
-  //           <AnswerImg src={otherImg[0]} />
-  //         ) : (
-  //           <LoadingImg>Loading...</LoadingImg>
-  //         )}{' '}
-  //       </>
-  //     );
-  //   } else if (question >= 6 && question < 7) {
-  //     return (
-  //       Number(albumRelease.split('-')[0]) +
-  //       1 +
-  //       '년 ' +
-  //       Number(albumRelease.split('-')[1]) +
-  //       '월'
-  //     );
-  //   } else {
-  //     return musicList[rand > 0 ? rand - 1 : rand + 1]['name'];
-  //   }
-  // };
+  const SecondAnswer = () => {
+    function qType1() {
+      if (question % 3 === 0) {
+        return (data[1].tracks.items[randList[question % 3]].name);
+      } else if (question % 3 === 1) {
+        return (data[2].tracks.items[randList[question % 3]].name);
+      } else if (question % 3 === 2) {
+        return (data[0].tracks.items[randList[0]].name);
+      } else {
+        return null;
+      };
+    }
 
-  // const ThirdAnswer = () => {
-  //   if (question >= 0 && question < 3) {
-  //     return otherMusic.length > 0 ? otherMusic[1] : null;
-  //   } else if (question >= 3 && question < 6) {
-  //     return (
-  //       <>
-  //         {otherAlbum[1]}
-  //         {otherImg ? (
-  //           <AnswerImg src={otherImg[1]} />
-  //         ) : (
-  //           <LoadingImg>Loading...</LoadingImg>
-  //         )}{' '}
-  //       </>
-  //     );
-  //   } else if (question >= 6 && question < 7) {
-  //     return (
-  //       albumRelease.split('-')[0] +
-  //       '년 ' +
-  //       (Number(albumRelease.split('-')[1]) + 1) +
-  //       '월'
-  //     );
-  //   } else {
-  //     return musicList[rand > 1 ? rand - 2 : rand + 2]['name'];
-  //   }
-  // };
+    function qType2() {
+      if (question % 3 === 0) {
+        return (
+          <>
+          <AnswerImg src={data[1].images[0].url} />
+          {data[1].name}
+          </>
+          );
+      } else if (question % 3 === 1) {
+        return (
+          <>
+          <AnswerImg src={data[2].images[0].url} />
+          {data[2].name}
+          </>
+          );
+      } else if (question % 3 === 2) {
+        return (
+          <>
+          <AnswerImg src={data[0].images[0].url} />
+          {data[0].name}
+          </>
+          );
+      } else {
+        return null;
+      };
+    };
+
+    function qType3() {
+      return (
+        data[0].release_date.split('-')[0] +
+        '년 ' +
+        (Number(data[0].release_date.split('-')[1] - 1) !== 0 ? Number(data[0].release_date.split('-')[1] - 1) : 12) +
+        '월'
+      );
+    };
+
+    function qType4() {
+      if (question % 3 === 0) {
+        return data[1].tracks.items[randList[question % 3]].name;
+      } else if (question % 3 === 1) {
+        return data[2].tracks.items[randList[question % 3]].name; 
+      } else if (question % 3 === 2) {
+        return data[0].tracks.items[randList[question % 3]].name; 
+      } else {
+        return null;
+      };
+    }
+
+    
+    if (question >= 0 && question < 3) {      
+      return qType1();
+    } else if (question >= 3 && question < 6) {      
+      return qType2();
+    } else if (question >= 6 && question < 7) {      
+      return qType3();
+    } else {      
+      return qType4();
+    }
+  };
+
+  const ThirdAnswer = () => {
+    function qType1() {
+      if (question % 3 === 0) {
+        return (data[2].tracks.items[randList[question % 3]].name);
+      } else if (question % 3 === 1) {
+        return (data[0].tracks.items[randList[question % 3]].name);
+      } else if (question % 3 === 2) {
+        return (data[1].tracks.items[randList[0]].name);
+      } else {
+        return null;
+      };
+    };
+
+    function qType2() {
+      if (question % 3 === 0) {
+        return (
+          <>
+          <AnswerImg src={data[2].images[0].url} />
+          {data[2].name}
+          </>
+          );
+      } else if (question % 3 === 1) {
+        return (
+          <>
+          <AnswerImg src={data[0].images[0].url} />
+          {data[0].name}
+          </>
+          );
+      } else if (question % 3 === 2) {
+        return (
+          <>
+          <AnswerImg src={data[1].images[0].url} />
+          {data[1].name}
+          </>
+          );
+      } else {
+        return null;
+      };
+    };
+
+    function qType3() {
+      return (
+        (Number(data[0].release_date.split('-')[0]) - 1) +
+        '년 ' +
+        Number(data[0].release_date.split('-')[1]) +
+        '월'
+      );
+    };
+
+    function qType4() {
+      if (question % 3 === 0) {
+        return data[2].tracks.items[randList[question % 3]].name;
+      } else if (question % 3 === 1) {
+        return data[0].tracks.items[0].name; 
+      } else if (question % 3 === 2) {
+        return data[1].tracks.items[randList[question % 3]].name; 
+      } else {
+        return null;
+      };
+    }
+
+    if (question >= 0 && question < 3) {
+      return qType1();
+    } else if (question >= 3 && question < 6) {
+      return qType2();
+    } else if (question >= 6 && question < 7) {
+      return qType3();
+    } else {
+      return qType4();
+    }
+  };
 
   return (
     <BtnWrap>
@@ -129,13 +221,13 @@ const Answer = ({
         style={{ order: Math.ceil(Math.random() * 3) }}
         onClick={NotAnswerClick}
       >
-        {/* {SecondAnswer()} */}
+        {SecondAnswer()}
       </ItemBtn>
       <ItemBtn
         style={{ order: Math.ceil(Math.random() * 3) }}
         onClick={NotAnswerClick}
       >
-        {/* {ThirdAnswer()} */}
+        {ThirdAnswer()}
       </ItemBtn>
     </BtnWrap>
   );
@@ -151,30 +243,36 @@ const BtnWrap = styled.div`
 `;
 
 const ItemBtn = styled.button`
-  position: relative;
   cursor: pointer;
-  box-sizing: border-box;
-  width: 200px;
-  height: 40px;
-  border: none;
+  position: relative;
+  margin: 0 12px;
+  padding: 0 7px;
+  height: 50px;
+  flex: 1;
   background-color: ${PALLETS.WHITE};
+  font-size: 19px;
+  font-weight: 500;
+  font-family: 'Pretendard';
+  border: none;
   border-radius: 200px;
+  box-sizing: border-box;
   transition: all 0.3s;
-
   &:hover {
-    background-color: inherit;
-    border: 2px solid ${PALLETS.WHITE};
-    color: ${PALLETS.WHITE};
+    background-color: ${PALLETS.GREEN};
+    color: ${PALLETS.BLACK};
+    img {
+      border: 5px solid ${PALLETS.GREEN};
+    }
   }
 `;
 
 const AnswerImg = styled.img`
   position: absolute;
-  top: -110px;
+  top: 0;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -115px);
   width: 100px;
   height: 100px;
   border-radius: 5px;
-  object-fit: cover;
+  box-sizing: border-box;
 `;
