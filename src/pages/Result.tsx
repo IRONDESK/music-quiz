@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PALLETS } from '../constants';
 import styled, { keyframes } from 'styled-components';
@@ -11,19 +11,18 @@ function Result() {
   const navigate = useNavigate();
   const myPoint = localStorage.getItem('correct-amount');
 
-  function goHome () {
+  function goHome() {
     navigate('/');
-  };
+  }
 
   return (
-  <Wrap>
-    <Header>
-      <Container>
-        <PointTxt>{myPoint}</PointTxt>
-        <>정답 수</>
-      </Container>
-    </Header>
-
+    <Wrap>
+      <Header>
+        <Container>
+          <PointTxt>{myPoint}</PointTxt>
+          <>정답 수</>
+        </Container>
+      </Header>
     <Contents>
       <ResultContents />
 
@@ -31,16 +30,14 @@ function Result() {
           처음으로
       </SubmitButton>
     </Contents>
+      <ShareWrap>
+        <ShareContents />
+      </ShareWrap>
 
-
-    <ShareWrap>
-      <ShareContents />
-    </ShareWrap>
-
-    <FooterWrap>
-      <Footer />
-    </FooterWrap>
-  </Wrap>
+      <FooterWrap>
+        <Footer />
+      </FooterWrap>
+    </Wrap>
   );
 }
 
@@ -75,7 +72,7 @@ const PointTxt = styled.span`
   display: block;
   margin: 10px 0;
   font-weight: 700;
-  animation: ${sizeUp} .9s forwards;
+  animation: ${sizeUp} 0.9s forwards;
 `;
 const Contents = styled.main`
   display: block;
