@@ -35,7 +35,7 @@ function Home() {
 
   const Modal = styled.article`
   display: ${ modalControl ? "flex" : "none" };
-  position: absolute;
+  position: fixed;
   gap: 24px;
   flex-direction: column;
   justify-content: center;
@@ -52,6 +52,7 @@ function Home() {
   border-radius: 15px;
   box-sizing: border-box;
   box-shadow: 0 0 15px 3px ${PALLETS.GRAY};
+  z-index: 1;
 `;
 
   return (
