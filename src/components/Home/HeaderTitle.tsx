@@ -6,10 +6,10 @@ function HeaderTitle() {
     return (
     <Wrap>
         <MainMsg>
-        당신의 최애 아티스트, <Strong>얼마나</Strong> 알고 있나요
+        당신의 최애 아티스트, <Strong>얼마나 알고 있나요</Strong>
         </MainMsg>
         <SubMsg>
-        아티스트를 선택하고 당신의 최애 몰입도를 측정하세요
+        아티스트를 선택하고 몰입점수를 측정하세요
         </SubMsg>
     </Wrap>
     );
@@ -17,7 +17,7 @@ function HeaderTitle() {
 
 // animation
 const spacing = keyframes`
-    0% { letter-spacing: 8px };
+    0% { letter-spacing: 7px };
     100% { letter-spacing : 0 };
 `;
 const topFadein = keyframes`
@@ -52,19 +52,28 @@ const MainMsg = styled.h1`
     text-align: center;
     line-height: 49px;
     animation: ${spacing} 1.3s;
+    font-family: 'ROKABold';
+    @media screen and (max-width: ${WIDTH.TAB}) {
+        animation: none;
+    }
 `;
 const SubMsg = styled.h2`
     display: block;
     padding: 5px 0;
     font-size: 23px;
     text-align: center;
+    line-height: 29px;
     opacity: 0;
+    word-break: keep-all;
     animation: ${topFadein} 1s forwards;
     animation-delay: .5s;
 `;
 const Strong = styled.span`
     font-size: 115%;
     font-weight: 800;
+    @media screen and (max-width: ${WIDTH.TAB}) {
+        display: block;
+    }
 `;
 
 

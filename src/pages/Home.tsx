@@ -6,6 +6,7 @@ import { PALLETS, WIDTH } from '../constants';
 import HeaderTitle from '../components/Home/HeaderTitle';
 import ArtistBox from '../components/Home/ArtistBox';
 import Footer from '../components/Layout/Footer';
+import Advertisement from '../components/Layout/Advertisement';
 
 function Home() {
   const navigate = useNavigate();
@@ -106,6 +107,7 @@ function Home() {
           ImageLink = "https://i.scdn.co/image/ab67616d00001e0217ac1b81f7ed7da5d1ad98db"
         />
       </ArtistWrap>
+        <AdWrap><Advertisement /></AdWrap>
       <MobileWrap>
         <SubmitButton onClick={goStart}>
           시작
@@ -158,8 +160,7 @@ const ArtistWrap = styled.article`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   @media screen and (max-width: ${WIDTH.MID}) {
-    padding: 0 50px;
-    padding-bottom: 140px;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
   }
@@ -171,6 +172,14 @@ const MobileWrap = styled.div`
     padding-top: 20px;
     bottom: 0;
     background: linear-gradient(180deg, rgba(30,30,30,0) 0%, rgba(30,30,30,0.8) 20%, rgba(30,30,30,1) 60%);
+  }
+`;
+const AdWrap = styled.div`
+  margin-bottom: 30px;
+  text-align: center;
+  @media screen and (max-width: ${WIDTH.MID}) {
+    margin-bottom: 0;
+    padding-bottom: 190px;
   }
 `;
 const SubmitButton = styled.a`

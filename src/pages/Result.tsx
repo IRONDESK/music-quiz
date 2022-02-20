@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import ResultContents from '../components/Result/ResultContents';
 import ShareContents from '../components/Result/ShareContents';
 import Footer from '../components/Layout/Footer';
+import Advertisement from '../components/Layout/Advertisement';
 
 function Result() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function Result() {
       <SubmitButton onClick={goHome}>
           처음으로
       </SubmitButton>
+      <AdWrap><Advertisement /></AdWrap>
     </Contents>
     <FooterWrap>
       <ShareContents />
@@ -92,7 +94,13 @@ const FooterWrap = styled.section`
   transform: translateX(-50%);
 
 `;
-
+const AdWrap = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  @media screen and (max-width: ${WIDTH.MID}) {
+    padding-bottom: 190px;
+  }
+`;
 const SubmitButton = styled.a`
   cursor: pointer;
   display: flex;

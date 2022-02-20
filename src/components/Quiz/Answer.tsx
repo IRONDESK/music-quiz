@@ -268,6 +268,7 @@ const ItemBtn = styled.button`
   border: none;
   border-radius: 200px;
   box-sizing: border-box;
+  -webkit-appearance: none;
   transition: all 0.3s;
   &:hover {
     background-color: ${PALLETS.GREEN};
