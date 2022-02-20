@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
 import { PALLETS, WIDTH } from '../../constants';
 
 const Question = ({ question, data, randList }: any) => {
+  const [songUrl, setSongUrl] = useState("");
+  useEffect(() => {
+    let targetSong = data[question % 3].tracks.items[randList[question % 3]].preview_url;
+    if (targetSong !== null) {
+      setSongUrl(targetSong);
+    } else {
+      setSongUrl(data[question % 2].tracks.items[randList[question % 2]].preview_url);
+    }
+  }, [question]);
+  
   if (question >= 0 && question < 3) {
     return (
       <>
@@ -40,9 +50,7 @@ const Question = ({ question, data, randList }: any) => {
       <>
         <ReactAudioPlayer
           style={{ width: '140px' }}
-          src={
-            data[question % 3].tracks.items[randList[question % 3]].preview_url
-          }
+          src={songUrl}
           onPlay={playSong}
           autoPlay={false}
           controls
@@ -92,7 +100,6 @@ const AlbumNameTxt = styled.p`
   text-align: center;
   box-sizing: border-box;
 `;
-
 
 const ItemTxt = styled.p`
   margin-bottom: 12px;
