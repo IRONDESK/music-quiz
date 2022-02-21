@@ -4,6 +4,7 @@
 
 ![8](https://user-images.githubusercontent.com/87234410/154940264-8de8f832-46c7-4702-b6ad-51a2e963d4d9.jpg)
 * Page : https://music-quizz.vercel.app/
+* 현재 **진행 중인 프로젝트**입니다.
 
 ## 개요
  * 선택한 아티스트의 앨범과 노래에 관한 퀴즈 서비스
