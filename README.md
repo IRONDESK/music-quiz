@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+<div align="center">
+  <h1>🎵최애 아티스트 테스트🎶</h1>
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![8](https://user-images.githubusercontent.com/87234410/154940264-8de8f832-46c7-4702-b6ad-51a2e963d4d9.jpg)
+* Page : https://music-quizz.vercel.app/
 
-## Available Scripts
+## 개요
+ * 선택한 아티스트의 앨범과 노래에 관한 퀴즈 서비스
+ * 스포티파이 API를 활용하여 자동으로 퀴즈를 생성
 
-In the project directory, you can run:
+## 목표와 기능
+### 목표
+ * 유저가 선택한 아티스트에 대한 관심도를 알 수 있도록 점수화
+ * 음악 API를 기반으로 문제가 자동으로 생성화 되도록 기능화
+ * 테스트를 즐기고 인증하는 MZ 세대 트렌드에 부합하는 콘텐츠화
 
-### `npm start`
+### 기능
+ * 선택한 아티스트의 앨범과 노래에 관한 퀴즈를 제공
+ * 제공되는 퀴즈는 API를 활용하여 총 4개로 구성됨
+   * 앨범에 수록된 곡 선택
+   * 수록곡이 포함된 앨범 선택
+   * 앨범의 발매 연월 선택
+   * 곡의 일부분을 듣고 곡 제목 선택
+ * 결과를 SNS에 공유할 수 있도록 제공
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 개발 환경
+### 기술 스택
+ * 프론트엔드 : React / TypeScript / Styled-component
+ * 백엔드 : Spotify API 활용 (https://developer.spotify.com)
+ 
+### 참여 인원
+ * 오래규(@OhRaeKyu), 손수철(@IRONDESK)
 
-### `npm test`
+### 개발 일정
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 주요 코드
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## File Tree
+```
+📂music-quiz
+├─ .gitignore
+├─ package-lock.json
+├─ package.json
+├─📂 public
+│  ├─ favicon.ico
+│  ├─📂 icon
+│  │  ├─ instagram.png
+│  │  ├─ kakao-talk.png
+│  │  └─ SpotifyLogo.png
+│  └─ index.html
+├─ README.md
+├─📂 src
+│  ├─📂 API
+│  │  └─ getAlbumID.ts
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─📂 components
+│  │  ├─📂 Home
+│  │  │  ├─ ArtistBox.tsx
+│  │  │  └─ HeaderTitle.tsx
+│  │  ├─📂 Layout
+│  │  │  ├─ Advertisement.tsx
+│  │  │  ├─ Footer.tsx
+│  │  │  └─ Header.tsx
+│  │  ├─📂 Quiz
+│  │  │  ├─ Answer.tsx
+│  │  │  ├─ Question.tsx
+│  │  │  └─ QuizItem.tsx
+│  │  └─📂 Result
+│  │     ├─ ResultContents.tsx
+│  │     └─ ShareContents.tsx
+│  ├─ constants.ts
+│  ├─ index.css
+│  ├─ index.tsx
+│  └─📂 pages
+│     ├─ Home.tsx
+│     ├─ Quiz.tsx
+│     └─ Result.tsx
+└─ tsconfig.json
+```
