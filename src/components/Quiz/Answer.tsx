@@ -60,18 +60,23 @@ const Answer = ({
         '월'
       );
     } else {
-      return data[question % 3].tracks.items[randList[question % 3]].name;
+      let targetSong = data[question % 3].tracks.items[randList[question % 3]].name;
+      if (targetSong !== null) {
+        return targetSong;
+      } else {
+        return data[question % 3].tracks.items[randList[question % 2]].preview_url;
+      }
     }
   };
 
   const SecondAnswer = () => {
     function qType1() {
       if (question % 3 === 0) {
-        return (data[1].tracks.items[randList[question % 3]].name);
+        return (data[1].tracks.items[2].name);
       } else if (question % 3 === 1) {
-        return (data[2].tracks.items[randList[question % 3]].name);
+        return (data[2].tracks.items[0].name);
       } else if (question % 3 === 2) {
-        return (data[0].tracks.items[randList[0]].name);
+        return (data[0].tracks.items[1].name);
       } else {
         return null;
       };
@@ -115,11 +120,11 @@ const Answer = ({
 
     function qType4() {
       if (question % 3 === 0) {
-        return data[1].tracks.items[randList[question % 3]].name;
+        return data[2].tracks.items[1].name;
       } else if (question % 3 === 1) {
-        return data[2].tracks.items[randList[question % 3]].name; 
+        return data[0].tracks.items[2].name; 
       } else if (question % 3 === 2) {
-        return data[0].tracks.items[randList[question % 3]].name; 
+        return data[1].tracks.items[0].name; 
       } else {
         return null;
       };
@@ -140,11 +145,11 @@ const Answer = ({
   const ThirdAnswer = () => {
     function qType1() {
       if (question % 3 === 0) {
-        return (data[2].tracks.items[randList[question % 3]].name);
+        return (data[2].tracks.items[3].name);
       } else if (question % 3 === 1) {
-        return (data[0].tracks.items[randList[question % 3]].name);
+        return (data[0].tracks.items[2].name);
       } else if (question % 3 === 2) {
-        return (data[1].tracks.items[randList[0]].name);
+        return (data[1].tracks.items[0].name);
       } else {
         return null;
       };
@@ -188,11 +193,11 @@ const Answer = ({
 
     function qType4() {
       if (question % 3 === 0) {
-        return data[2].tracks.items[randList[question % 3]].name;
+        return data[2].tracks.items[2].name;
       } else if (question % 3 === 1) {
-        return data[0].tracks.items[0].name; 
+        return data[0].tracks.items[3].name; 
       } else if (question % 3 === 2) {
-        return data[1].tracks.items[randList[question % 3]].name; 
+        return data[1].tracks.items[1].name; 
       } else {
         return null;
       };
@@ -268,6 +273,8 @@ const ItemBtn = styled.button`
   border: none;
   border-radius: 200px;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-text-fill-color: ${PALLETS.BLACK};
   transition: all 0.3s;
   &:hover {
     background-color: ${PALLETS.GREEN};

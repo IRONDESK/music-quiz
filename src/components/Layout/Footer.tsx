@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PALLETS, WIDTH } from '../../constants';
-import Advertisement from './Advertisement';
 
 function Footer() {
   return (
@@ -14,7 +13,6 @@ function Footer() {
         API
       </Powered>
       <Create>오래규 | 손수철</Create>
-      <Advertisement />
     </Wrap>
   );
 }
@@ -35,6 +33,7 @@ const Powered = styled.p`
 `;
 const Create = styled.p`
   margin: 8px 0 40px;
+  text-align: center;
 `;
 const Logo = styled.img`
   margin-left: 5px;
