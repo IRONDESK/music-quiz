@@ -7,7 +7,7 @@ function Advertisement() {
       <ins
         className="kakao_ad_area"
         style={{ display: 'none' }}
-        data-ad-unit="DAN-vdMgEFsiSEFaY68c"
+        data-ad-unit="DAN-fpu2WnO4I0AdsgfX"
         data-ad-width="320"
         data-ad-height="100"
       ></ins>
