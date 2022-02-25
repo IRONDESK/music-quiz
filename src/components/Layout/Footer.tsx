@@ -23,6 +23,8 @@ const Wrap = styled.footer`
     font-size: 16px;
     color: #888;
     @media screen and (max-width: ${WIDTH.TAB}) {
+        margin: 15px 0;
+        font-size: 14px;
         width: 100%;
     }
 `;
@@ -34,6 +36,9 @@ const Powered = styled.p`
 const Create = styled.p`
   margin: 8px 0 40px;
   text-align: center;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+        margin-bottom: 3px;
+    }
 `;
 const Logo = styled.img`
   margin-left: 5px;
