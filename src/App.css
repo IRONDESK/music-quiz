@@ -3,6 +3,10 @@
   font-family: 'ROKABold';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKABold.woff') format('woff');
 }
+@font-face {
+  font-family: 'KNPSB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KNPSBandali-Regular00.woff') format('woff');
+}
 
 .blind {
   position: absolute;
