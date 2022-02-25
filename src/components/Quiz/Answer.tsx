@@ -222,7 +222,7 @@ const Answer = ({
           marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
         onClick={AnswerClick}
       >
-        {FirstAnswer()}(정답)
+        {FirstAnswer()}
       </ItemBtn>
       <ItemBtn
         style={{
