@@ -29,7 +29,7 @@ export const getAuth = async () => {
 // 가수의 앨범 id 불러오기
 export const getArtistAlbum = async (artistId: string) => {
   const access_token: string = await getAuth();
-  const api_url: string = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album`;
+  const api_url: string = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=KR`;
 
   try {
     const res = await axios.get(api_url, {
@@ -37,12 +37,12 @@ export const getArtistAlbum = async (artistId: string) => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    let targetArray:any = [];
+    let targetArray: any = [];
     while (targetArray.length < 3) {
       targetArray.push(res.data.items[getRandom(res.data.items.length)].id);
-      let set:any = new Set(targetArray);
+      let set: any = new Set(targetArray);
       targetArray = [...set];
-    };
+    }
     return await targetArray;
   } catch (err) {
     console.log(err);
