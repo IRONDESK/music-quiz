@@ -17,25 +17,25 @@ function Result() {
   }
 
   return (
-  <Wrap>
-    <Header>
-      <HeaderWrap>
-        <PointTxt>{myPoint}</PointTxt>
-        <>정답 수</>
-      </HeaderWrap>
-    </Header>
-    <Contents>
-      <ResultContents />
-      <SubmitButton onClick={goHome}>
-          처음으로
-      </SubmitButton>
-      <AdWrap><Advertisement /></AdWrap>
-    </Contents>
-    <FooterWrap>
-      <ShareContents />
-      <Footer />
-    </FooterWrap>
-  </Wrap>
+    <Wrap>
+      <Header>
+        <HeaderWrap>
+          <PointTxt>{myPoint}</PointTxt>
+          <>정답 수</>
+        </HeaderWrap>
+      </Header>
+      <Contents>
+        <ResultContents />
+        <SubmitButton onClick={goHome}>처음으로</SubmitButton>
+        <AdWrap>
+          <Advertisement />
+        </AdWrap>
+      </Contents>
+      <FooterWrap>
+        <ShareContents />
+        <Footer />
+      </FooterWrap>
+    </Wrap>
   );
 }
 
@@ -54,7 +54,7 @@ const Header = styled.header`
 `;
 const HeaderWrap = styled.section`
   display: flex;
-  margin: 0 auto; 
+  margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   width: 768px;
@@ -70,7 +70,7 @@ const PointTxt = styled.span`
   display: block;
   margin: 10px 0;
   font-weight: 700;
-  animation: ${sizeUp} .8s forwards;
+  animation: ${sizeUp} 0.8s forwards;
 `;
 const Contents = styled.main`
   display: block;
@@ -84,22 +84,12 @@ const Contents = styled.main`
   }
 `;
 const FooterWrap = styled.section`
-  position: fixed;
-  width: 768px;
-  bottom: 0;
-  left: 50%;
   padding-top: 20px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(30,30,30,0) 0%, rgba(30,30,30,0.8) 20%, rgba(30,30,30,1) 60%);
-  transform: translateX(-50%);
-
 `;
 const AdWrap = styled.div`
   margin-top: 30px;
   text-align: center;
-  @media screen and (max-width: ${WIDTH.MID}) {
-    padding-bottom: 190px;
-  }
 `;
 const SubmitButton = styled.a`
   cursor: pointer;
@@ -115,7 +105,7 @@ const SubmitButton = styled.a`
   font-weight: 700;
   letter-spacing: 1.76px;
   border-radius: 200px;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 
   &:hover {
     background-color: ${PALLETS.GREEN};

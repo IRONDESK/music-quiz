@@ -4,16 +4,19 @@ import styled from 'styled-components';
 import { PALLETS, WIDTH } from '../../constants';
 
 const Question = ({ question, data, randList }: any) => {
-  const [songUrl, setSongUrl] = useState("");
+  const [songUrl, setSongUrl] = useState('');
   useEffect(() => {
-    let targetSong = data[question % 3].tracks.items[randList[question % 3]].preview_url;
+    let targetSong =
+      data[question % 3].tracks.items[randList[question % 3]].preview_url;
     if (targetSong !== null) {
       setSongUrl(targetSong);
     } else {
-      setSongUrl(data[question % 2].tracks.items[randList[question % 2]].preview_url);
+      setSongUrl(
+        data[question % 2].tracks.items[randList[question % 2]].preview_url
+      );
     }
   }, [question]);
-  
+
   if (question >= 0 && question < 3) {
     return (
       <>
@@ -28,8 +31,10 @@ const Question = ({ question, data, randList }: any) => {
     return (
       <>
         <ItemTxt>
-          <big>{data[question % 3].tracks.items[randList[question % 3]].name}</big><br />
-          이 수록곡이 포함되어 있는 앨범은?
+          <big>
+            {data[question % 3].tracks.items[randList[question % 3]].name}
+          </big>
+          <br />이 수록곡이 포함되어 있는 앨범은?
         </ItemTxt>
       </>
     );
@@ -48,13 +53,18 @@ const Question = ({ question, data, randList }: any) => {
   } else {
     return (
       <>
-        <ReactAudioPlayer
-          style={{ width: '140px' }}
-          src={songUrl}
-          onPlay={playSong}
-          autoPlay={false}
-          controls
-        />
+        <AudioWrap>
+          <ReactAudioPlayer
+            style={{ width: '140px' }}
+            src={songUrl}
+            onPlay={playSong}
+            autoPlay={false}
+            controls
+          />
+          <LicenseTxt>
+            (이 음원은 Spotify Open API에서 제공하는 미리듣기입니다. )
+          </LicenseTxt>
+        </AudioWrap>
         <ItemTxt>이 노래의 제목은?</ItemTxt>
       </>
     );
@@ -92,13 +102,30 @@ const AlbumNameTxt = styled.p`
   width: 100%;
   height: 50%;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 25%,
+    rgba(0, 0, 0, 1) 100%
+  );
   color: ${PALLETS.WHITE};
   font-size: 20px;
   font-weight: 600;
   line-height: 26px;
   text-align: center;
   box-sizing: border-box;
+`;
+
+const AudioWrap = styled.div`
+  text-align: center;
+`;
+
+const LicenseTxt = styled.p`
+  margin-top: 15px;
+  text-align: center;
+  color: ${PALLETS.WHITE};
+  font-size: 12px;
+  opacity: 0.6;
 `;
 
 const ItemTxt = styled.p`
