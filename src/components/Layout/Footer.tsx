@@ -18,15 +18,14 @@ function Footer() {
 }
 
 const Wrap = styled.footer`
-    margin: 35px 0;
-    width: 768px;
-    font-size: 16px;
-    color: #888;
-    @media screen and (max-width: ${WIDTH.TAB}) {
-        margin: 15px 0;
-        font-size: 14px;
-        width: 100%;
-    }
+  margin: 35px 0;
+  font-size: 16px;
+  color: #888;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    margin: 15px 0;
+    font-size: 14px;
+    width: 100%;
+  }
 `;
 const Powered = styled.p`
   display: flex;
@@ -37,8 +36,8 @@ const Create = styled.p`
   margin: 8px 0 40px;
   text-align: center;
   @media screen and (max-width: ${WIDTH.TAB}) {
-        margin-bottom: 3px;
-    }
+    margin-bottom: 3px;
+  }
 `;
 const Logo = styled.img`
   margin-left: 5px;
