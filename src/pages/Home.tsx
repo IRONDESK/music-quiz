@@ -11,12 +11,14 @@ import Advertisement from '../components/Layout/Advertisement';
 function Home() {
   const navigate = useNavigate();
   const [selectedArtist, setSelectedArtist] = useState<string>("");
+  const [selectedArtistName, setSelectedArtistName] = useState<string>("");
   const [modalControl, setModalControl] = useState<boolean>(false);
 
   function selectArtist(e: any) {
     const target = e.target.closest('label');
     if (target) {
       setSelectedArtist(target.dataset.spotifyid);
+      setSelectedArtistName(target.dataset.artistname);
     }
   }
 
@@ -24,6 +26,7 @@ function Home() {
     if (selectedArtist) {
       navigate('/quiz');
       localStorage.setItem('artist-id', selectedArtist);
+      localStorage.setItem('artist-name', selectedArtistName);
     } else {
       setModalControl(true);
     }

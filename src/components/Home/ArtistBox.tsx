@@ -10,7 +10,7 @@ type ItemProps = {
 
 function ArtistBox({ SpotifyID, Name, ImageLink }:ItemProps) {
     return (
-    <LabelWrap data-spotifyid={SpotifyID}>
+    <LabelWrap data-spotifyid={SpotifyID} data-artistname={Name}>
         <InputRadio type="radio" name="artist" hidden/>
         <ItemWrap data-spotifyid={SpotifyID}>
             <Img src={ImageLink} />
