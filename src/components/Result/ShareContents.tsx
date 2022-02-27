@@ -15,7 +15,6 @@ function ShareContents() {
     useEffect(() => {
         if (!Kakao.isInitialized()) {
             Kakao.init('d44e634ecdedceddc7fce2985f0d7ccf');
-            console.log(Kakao.isInitialized());
         }
     }, [])
     
