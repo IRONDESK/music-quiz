@@ -50,13 +50,49 @@
 
 ## 주요 코드
 
-### 코드의 역할 (코드의 파일 위치)
+### Spotify API 호출 (src/API/getAlbumID.ts)
 
-```
-코드
-```
+```ts
+// 가수의 앨범 id 불러오기
+export const getArtistAlbum = async (artistId: string) => {
+  const access_token: string = await getAuth();
+  const api_url: string = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=KR`;
 
-- 코드 설명 or 문제 해결 과정
+  try {
+    const res = await axios.get(api_url, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    let targetArray: any = [];
+    while (targetArray.length < 3) {
+      targetArray.push(res.data.items[getRandom(res.data.items.length)].id);
+      let set: any = new Set(targetArray);
+      targetArray = [...set];
+    }
+    return await targetArray;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 랜덤 값 반환 함수
+const getRandom = (n: number) => {
+  return Math.floor(Math.random() * n);
+};
+```
+ * API에서 아티스트의 앨범을 불러와 그 중 3개를 랜덤으로 ``targetArray``에 담았음.
+ * 문제를 생성할 때, 앨범이 중복돼서 불러와지는 문제가 있었음.
+```ts
+// 기존 코드
+return [
+      res.data.items[getRandom(res.data.items.length)].id,
+      res.data.items[getRandom(res.data.items.length)].id,
+      res.data.items[getRandom(res.data.items.length)].id,
+    ]
+```
+ * ``targetArray``를  ``Set``을 사용해 중복되는 앨범이 담기는 것을 방지함.
+
 
 ## File Tree
 
