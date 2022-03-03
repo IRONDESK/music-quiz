@@ -6,7 +6,6 @@ import { PALLETS, WIDTH } from '../constants';
 import HeaderTitle from '../components/Home/HeaderTitle';
 import ArtistBox from '../components/Home/ArtistBox';
 import Footer from '../components/Layout/Footer';
-import Advertisement from '../components/Layout/Advertisement';
 
 function Home() {
   const navigate = useNavigate();
@@ -178,14 +177,6 @@ const MobileWrap = styled.div`
       rgba(30, 30, 30, 0.8) 20%,
       rgba(30, 30, 30, 1) 60%
     );
-  }
-`;
-const AdWrap = styled.div`
-  margin-bottom: 30px;
-  text-align: center;
-  @media screen and (max-width: ${WIDTH.MID}) {
-    margin-bottom: 0;
-    padding-bottom: 190px;
   }
 `;
 const SubmitButton = styled.a`

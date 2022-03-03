@@ -5,12 +5,11 @@
 ![8](https://user-images.githubusercontent.com/87234410/154940264-8de8f832-46c7-4702-b6ad-51a2e963d4d9.jpg)
 
 - Page : https://music-quizz.vercel.app/
-- 현재 **진행 중인 프로젝트**입니다.
 
 ## 개요
 
 - 선택한 아티스트의 앨범과 노래에 관한 퀴즈 서비스
-- 스포티파이 API를 활용하여 자동으로 퀴즈를 생성
+- Spotify API를 활용하여 자동으로 퀴즈를 생성
 
 ## 목표와 기능
 
@@ -81,18 +80,51 @@ const getRandom = (n: number) => {
   return Math.floor(Math.random() * n);
 };
 ```
- * API에서 아티스트의 앨범을 불러와 그 중 3개를 랜덤으로 ``targetArray``에 담았음.
- * 문제를 생성할 때, 앨범이 중복돼서 불러와지는 문제가 있었음.
+
+- API에서 아티스트의 앨범을 불러와 그 중 3개를 랜덤으로 `targetArray`에 담았음.
+- 문제를 생성할 때, 앨범이 중복돼서 불러와지는 문제가 있었음.
+
 ```ts
 // 기존 코드
 return [
-      res.data.items[getRandom(res.data.items.length)].id,
-      res.data.items[getRandom(res.data.items.length)].id,
-      res.data.items[getRandom(res.data.items.length)].id,
-    ]
+  res.data.items[getRandom(res.data.items.length)].id,
+  res.data.items[getRandom(res.data.items.length)].id,
+  res.data.items[getRandom(res.data.items.length)].id,
+];
 ```
- * ``targetArray``를  ``Set``을 사용해 중복되는 앨범이 담기는 것을 방지함.
 
+- `targetArray`를 `Set`을 사용해 중복되는 앨범이 담기는 것을 방지함.
+
+<br/>
+
+### API Data 렌더링 (src/components/Quiz/QuizItem.tsx 46-64)
+
+```tsx
+if (data && data.length === 3) {
+  return (
+    <ItemWrap>
+      <Correct>{correct ? 'Correct ' + correct : null}</Correct>
+      <Progress max={quizLength} value={question} />
+      <Question question={question} data={data} randList={randList} />
+      <Answer
+        question={question}
+        setQuestion={setQuestion}
+        correct={correct}
+        setCorrect={setCorrect}
+        data={data}
+        randList={randList}
+      />
+    </ItemWrap>
+  );
+} else {
+  return null;
+}
+```
+
+- API Data를 렌더링 하는 과정에서 초기 값(null)에 의해 undefined type error가 발생하였다.
+- if-else 구문을 통해 data에 값이 제대로 저장 되었을 때 조건부 렌더링 될 수 있도록 해결함.
+
+<br/>
 
 ## File Tree
 
