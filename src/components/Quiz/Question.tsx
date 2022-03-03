@@ -1,44 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
-import { PALLETS, WIDTH } from '../../constants';
+import { PALLETS } from '../../constants';
 
 const Question = ({ question, data, randList }: any) => {
-  const [songUrl, setSongUrl] = useState('');
-  useEffect(() => {
-    let targetSong =
-      data[question % 3].tracks.items[randList[question % 3]].preview_url;
-    if (targetSong !== null) {
-      setSongUrl(targetSong);
-    } else {
-      setSongUrl(
-        data[question % 2].tracks.items[randList[question % 2]].preview_url
-      );
-    }
-  }, [question]);
-
-  if (question >= 0 && question < 3) {
+  if (question >= 0 && question < 2) {
     return (
       <>
         <AlbumWrap>
-          <AlbumNameTxt>{data[question % 3].name}</AlbumNameTxt>
-          <AlbumImg src={data[question % 3].images[0].url} />
+          <AlbumNameTxt>{data[question % 4].name}</AlbumNameTxt>
+          <AlbumImg src={data[question % 4].images[0].url} />
         </AlbumWrap>
         <ItemTxt>이 앨범에 포함되어 있는 수록곡은?</ItemTxt>
       </>
     );
-  } else if (question >= 3 && question < 6) {
+  } else if (question >= 2 && question < 4) {
     return (
       <>
         <ItemTxt>
           <big>
-            {data[question % 3].tracks.items[randList[question % 3]].name}
+            {data[question % 4].tracks.items[randList[question % 4]].name}
           </big>
           <br />이 수록곡이 포함되어 있는 앨범은?
         </ItemTxt>
       </>
     );
-  } else if (question >= 6 && question < 7) {
+  } else if (question >= 4 && question < 5) {
     return (
       <>
         <AlbumWrap>
@@ -56,7 +43,10 @@ const Question = ({ question, data, randList }: any) => {
         <AudioWrap>
           <ReactAudioPlayer
             style={{ width: '140px' }}
-            src={songUrl}
+            src={
+              data[question % 4].tracks.items[randList[question % 4]]
+                .preview_url
+            }
             onPlay={playSong}
             autoPlay={false}
             controls
