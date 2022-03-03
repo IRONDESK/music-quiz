@@ -83,9 +83,19 @@ function Home() {
             ImageLink="https://i.scdn.co/image/ab67706c0000da84161330f59573a6b5bb402101"
           />
           <ArtistBox
-            SpotifyID="6dhfy4ByARPJdPtMyrUYJK"
-            Name="백예린"
-            ImageLink="https://i.scdn.co/image/ab67616d00001e0217ac1b81f7ed7da5d1ad98db"
+            SpotifyID="1z4g3DjTBBZKhvAroFlhOM"
+            Name="Red Velvet"
+            ImageLink="https://i.scdn.co/image/ab6761610000f17844a1749aabb0a184657d877d"
+          />
+          <ArtistBox
+            SpotifyID="5DuzBeOgFwViFcv00Q5PFb"
+            Name="WINNER"
+            ImageLink="https://i.scdn.co/image/ab6761610000f1785b43dd660205f16ef813a0df"
+          />
+          <ArtistBox
+            SpotifyID="24jJXZRz3aGvjVvZ4OoerD"
+            Name="먼데이 키즈"
+            ImageLink="https://i.scdn.co/image/ab67616d00001e0263a95f9c7e07d39a6e989647"
           />
         </ArtistWrap>
         <MobileWrap>
@@ -134,10 +144,11 @@ const Contents = styled.main`
 `;
 const ArtistWrap = styled.article`
   display: grid;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   @media screen and (max-width: ${WIDTH.MID}) {
+    margin-bottom: 150px;
     padding: 0 30px;
     display: flex;
     flex-direction: column;
