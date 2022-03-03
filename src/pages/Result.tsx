@@ -6,7 +6,6 @@ import styled, { keyframes } from 'styled-components';
 import ResultContents from '../components/Result/ResultContents';
 import ShareContents from '../components/Result/ShareContents';
 import Footer from '../components/Layout/Footer';
-import Advertisement from '../components/Layout/Advertisement';
 
 function Result() {
   const navigate = useNavigate();
@@ -27,9 +26,6 @@ function Result() {
       <Contents>
         <ResultContents />
         <SubmitButton onClick={goHome}>처음으로</SubmitButton>
-        <AdWrap>
-          <Advertisement />
-        </AdWrap>
       </Contents>
       <FooterWrap>
         <ShareContents />
@@ -85,10 +81,6 @@ const Contents = styled.main`
 `;
 const FooterWrap = styled.section`
   padding-top: 20px;
-  text-align: center;
-`;
-const AdWrap = styled.div`
-  margin-top: 30px;
   text-align: center;
 `;
 const SubmitButton = styled.a`
