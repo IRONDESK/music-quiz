@@ -29,6 +29,9 @@ function QuizItem() {
             Authorization: `Bearer ${access_token}`,
           },
         });
+        if (res.data.images.length === 0) {
+          res.data.images.push({ url: 'icon/alterImg.png' });
+        }
         const rand = Math.floor(Math.random() * res.data.tracks.items.length);
         setData((prevArray: any) => [...prevArray, res.data]);
         setRandList((prevArray: any) => [...prevArray, rand]);
