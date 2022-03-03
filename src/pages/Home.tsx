@@ -35,31 +35,9 @@ function Home() {
     setModalControl(false);
   }
 
-  const Modal = styled.article`
-    display: ${modalControl ? 'flex' : 'none'};
-    position: fixed;
-    gap: 24px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
-    width: 400px;
-    height: 200px;
-    top: 50%;
-    left: 50%;
-    background-color: ${PALLETS.GREEN};
-    font-size: 25px;
-    font-weight: 600;
-    transform: translate(-50%, -50%);
-    border-radius: 15px;
-    box-sizing: border-box;
-    box-shadow: 0 0 15px 3px ${PALLETS.GRAY};
-    z-index: 1;
-  `;
-
   return (
     <Wrap>
-      <Modal>
+      <Modal visible={modalControl}>
         아티스트를 선택해주세요.
         <CloseBtn onClick={setClose}>×</CloseBtn>
       </Modal>
@@ -196,6 +174,28 @@ const SubmitButton = styled.a`
   &:hover {
     background-color: ${PALLETS.GREEN};
   }
+`;
+
+const Modal = styled.article<{ visible: boolean }>`
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
+  position: fixed;
+  gap: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  width: 400px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  background-color: ${PALLETS.GREEN};
+  font-size: 25px;
+  font-weight: 600;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px 3px ${PALLETS.GRAY};
+  z-index: 1;
 `;
 
 export default Home;

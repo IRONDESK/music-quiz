@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { PALLETS, WIDTH } from '../../constants';
 import { useNavigate } from 'react-router-dom';
+
+import { getRandom } from '../../API/getAlbumID';
 
 type props = {
   question: number;
@@ -20,7 +22,7 @@ const Answer = ({
   data,
   randList,
 }: props) => {
-  const quizLength: number = 10;
+  const quizLength: number = 7;
   const navigate = useNavigate();
 
   const goNextStage = () => {
@@ -43,16 +45,16 @@ const Answer = ({
   };
 
   const FirstAnswer = () => {
-    if (question && question >= 0 && question < 3) {
-      return data[question % 3].tracks.items[randList[question % 3]].name;
-    } else if (question >= 3 && question < 6) {
+    if (question && question >= 0 && question < 2) {
+      return data[question % 4].tracks.items[randList[question % 4]].name;
+    } else if (question >= 2 && question < 4) {
       return (
         <>
-          <AnswerImg src={data[question % 3].images[0].url} />
-          {data[question % 3].name}
+          <AnswerImg src={data[question % 4].images[0].url} />
+          {data[question % 4].name}
         </>
       );
-    } else if (question >= 6 && question < 7) {
+    } else if (question >= 4 && question < 5) {
       return (
         data[0].release_date.split('-')[0] +
         '년 ' +
@@ -60,154 +62,137 @@ const Answer = ({
         '월'
       );
     } else {
-      let targetSong = data[question % 3].tracks.items[randList[question % 3]].name;
-      if (targetSong !== null) {
-        return targetSong;
-      } else {
-        return data[question % 3].tracks.items[randList[question % 2]].preview_url;
-      }
+      return data[question % 4].tracks.items[randList[question % 4]].name;
     }
   };
 
   const SecondAnswer = () => {
     function qType1() {
-      if (question % 3 === 0) {
-        return (data[1].tracks.items[2].name);
-      } else if (question % 3 === 1) {
-        return (data[2].tracks.items[0].name);
-      } else if (question % 3 === 2) {
-        return (data[0].tracks.items[1].name);
+      if (question % 4 === 0) {
+        return data[1].tracks.items[getRandom(data[1].tracks.items.length)]
+          .name;
+      } else if (question % 4 === 1) {
+        return data[2].tracks.items[getRandom(data[2].tracks.items.length)]
+          .name;
       } else {
         return null;
-      };
+      }
     }
 
     function qType2() {
-      if (question % 3 === 0) {
+      if (question % 4 === 2) {
         return (
           <>
-          <AnswerImg src={data[1].images[0].url} />
-          {data[1].name}
+            <AnswerImg src={data[3].images[0].url} />
+            {data[3].name}
           </>
-          );
-      } else if (question % 3 === 1) {
+        );
+      } else if (question % 4 === 3) {
         return (
           <>
-          <AnswerImg src={data[2].images[0].url} />
-          {data[2].name}
+            <AnswerImg src={data[0].images[0].url} />
+            {data[0].name}
           </>
-          );
-      } else if (question % 3 === 2) {
-        return (
-          <>
-          <AnswerImg src={data[0].images[0].url} />
-          {data[0].name}
-          </>
-          );
+        );
       } else {
         return null;
-      };
-    };
+      }
+    }
 
     function qType3() {
       return (
         data[0].release_date.split('-')[0] +
         '년 ' +
-        (Number(data[0].release_date.split('-')[1] - 1) !== 0 ? Number(data[0].release_date.split('-')[1] - 1) : 12) +
+        (Number(data[0].release_date.split('-')[1] - 1) !== 0
+          ? Number(data[0].release_date.split('-')[1] - 1)
+          : 12) +
         '월'
       );
-    };
-
-    function qType4() {
-      if (question % 3 === 0) {
-        return data[2].tracks.items[1].name;
-      } else if (question % 3 === 1) {
-        return data[0].tracks.items[2].name; 
-      } else if (question % 3 === 2) {
-        return data[1].tracks.items[0].name; 
-      } else {
-        return null;
-      };
     }
 
-    
-    if (question >= 0 && question < 3) {      
+    function qType4() {
+      if (question % 4 === 1) {
+        return data[3].tracks.items[getRandom(data[3].tracks.items.length)]
+          .name;
+      } else if (question % 4 === 2) {
+        return data[0].tracks.items[getRandom(data[0].tracks.items.length)]
+          .name;
+      } else {
+        return null;
+      }
+    }
+
+    if (question >= 0 && question < 2) {
       return qType1();
-    } else if (question >= 3 && question < 6) {      
+    } else if (question >= 2 && question < 4) {
       return qType2();
-    } else if (question >= 6 && question < 7) {      
+    } else if (question >= 4 && question < 5) {
       return qType3();
-    } else {      
+    } else {
       return qType4();
     }
   };
 
   const ThirdAnswer = () => {
     function qType1() {
-      if (question % 3 === 0) {
-        return (data[2].tracks.items[3].name);
-      } else if (question % 3 === 1) {
-        return (data[0].tracks.items[2].name);
-      } else if (question % 3 === 2) {
-        return (data[1].tracks.items[0].name);
+      if (question % 4 === 0) {
+        return data[2].tracks.items[getRandom(data[2].tracks.items.length)]
+          .name;
+      } else if (question % 4 === 1) {
+        return data[3].tracks.items[getRandom(data[3].tracks.items.length)]
+          .name;
       } else {
         return null;
-      };
-    };
+      }
+    }
 
     function qType2() {
-      if (question % 3 === 0) {
+      if (question % 4 === 2) {
         return (
           <>
-          <AnswerImg src={data[2].images[0].url} />
-          {data[2].name}
+            <AnswerImg src={data[1].images[0].url} />
+            {data[1].name}
           </>
-          );
-      } else if (question % 3 === 1) {
+        );
+      } else if (question % 4 === 3) {
         return (
           <>
-          <AnswerImg src={data[0].images[0].url} />
-          {data[0].name}
+            <AnswerImg src={data[2].images[0].url} />
+            {data[2].name}
           </>
-          );
-      } else if (question % 3 === 2) {
-        return (
-          <>
-          <AnswerImg src={data[1].images[0].url} />
-          {data[1].name}
-          </>
-          );
+        );
       } else {
         return null;
-      };
-    };
+      }
+    }
 
     function qType3() {
       return (
-        (Number(data[0].release_date.split('-')[0]) - 1) +
+        Number(data[0].release_date.split('-')[0]) -
+        1 +
         '년 ' +
         Number(data[0].release_date.split('-')[1]) +
         '월'
       );
-    };
-
-    function qType4() {
-      if (question % 3 === 0) {
-        return data[2].tracks.items[2].name;
-      } else if (question % 3 === 1) {
-        return data[0].tracks.items[3].name; 
-      } else if (question % 3 === 2) {
-        return data[1].tracks.items[1].name; 
-      } else {
-        return null;
-      };
     }
 
-    if (question >= 0 && question < 3) {
+    function qType4() {
+      if (question % 4 === 1) {
+        return data[2].tracks.items[getRandom(data[2].tracks.items.length)]
+          .name;
+      } else if (question % 4 === 2) {
+        return data[3].tracks.items[getRandom(data[3].tracks.items.length)]
+          .name;
+      } else {
+        return null;
+      }
+    }
+
+    if (question >= 0 && question < 2) {
       return qType1();
-    } else if (question >= 3 && question < 6) {
+    } else if (question >= 2 && question < 4) {
       return qType2();
-    } else if (question >= 6 && question < 7) {
+    } else if (question >= 4 && question < 5) {
       return qType3();
     } else {
       return qType4();
@@ -219,7 +204,8 @@ const Answer = ({
       <ItemBtn
         style={{
           order: Math.ceil(Math.random() * 3),
-          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
+          marginTop: question >= 2 && question < 4 ? '110px' : '',
+        }}
         onClick={AnswerClick}
       >
         {FirstAnswer()}
@@ -227,7 +213,8 @@ const Answer = ({
       <ItemBtn
         style={{
           order: Math.ceil(Math.random() * 3),
-          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
+          marginTop: question >= 2 && question < 4 ? '110px' : '',
+        }}
         onClick={NotAnswerClick}
       >
         {SecondAnswer()}
@@ -235,7 +222,8 @@ const Answer = ({
       <ItemBtn
         style={{
           order: Math.ceil(Math.random() * 3),
-          marginTop: (question >= 3 && question < 6 ? "110px" : "") }}
+          marginTop: question >= 2 && question < 4 ? '110px' : '',
+        }}
         onClick={NotAnswerClick}
       >
         {ThirdAnswer()}
@@ -291,7 +279,7 @@ const ItemBtn = styled.button`
       img {
         border: none;
       }
-    };
+    }
   }
 `;
 

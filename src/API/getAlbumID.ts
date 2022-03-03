@@ -38,7 +38,7 @@ export const getArtistAlbum = async (artistId: string) => {
       },
     });
     let targetArray: string[] = [];
-    while (targetArray.length < 3) {
+    while (targetArray.length < 4) {
       targetArray.push(res.data.items[getRandom(res.data.items.length)].id);
       let set: any = new Set(targetArray);
       targetArray = [...set];
@@ -50,6 +50,6 @@ export const getArtistAlbum = async (artistId: string) => {
 };
 
 // 랜덤 값 반환 함수
-const getRandom = (n: number):number => {
+export const getRandom = (n: number): number => {
   return Math.floor(Math.random() * n);
 };
