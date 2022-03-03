@@ -42,12 +42,13 @@ const Question = ({ question, data, randList }: any) => {
       <>
         <AudioWrap>
           <ReactAudioPlayer
-            style={{ width: '140px' }}
+            style={{ width: '190px' }}
             src={
               data[question % 4].tracks.items[randList[question % 4]]
                 .preview_url
             }
             onPlay={playSong}
+            onEnded={endSong}
             autoPlay={false}
             controls
           />
@@ -64,10 +65,11 @@ const Question = ({ question, data, randList }: any) => {
 const playSong = (e: any) => {
   setTimeout(() => {
     e.target.currentTime = 9999999;
-  }, 380);
+  }, 490);
 };
-
-export default Question;
+const endSong = (e: any) => {
+  e.target.currentTime = 0;
+};
 
 const AlbumWrap = styled.div`
   position: relative;
@@ -141,3 +143,5 @@ const ItemTxt = styled.p`
 const QuizWrap = styled.article`
   text-align: center;
 `;
+
+export default Question;

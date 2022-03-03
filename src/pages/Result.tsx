@@ -103,7 +103,7 @@ const SubmitButton = styled.a`
   cursor: pointer;
   display: flex;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 25px;
   width: 160px;
   height: 47px;
   background-color: ${PALLETS.WHITE};
