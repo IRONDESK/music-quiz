@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PALLETS, WIDTH } from '../constants';
 import styled, { keyframes } from 'styled-components';
@@ -9,19 +9,35 @@ import Footer from '../components/Layout/Footer';
 
 function Result() {
   const navigate = useNavigate();
-  const myPoint = localStorage.getItem('correct-amount');
+  const [title, setTitle] = useState<string | null>(null);
+  const myPoint:number = Number(localStorage.getItem('correct-amount'));
 
   function goHome() {
     navigate('/');
   }
 
+  useEffect(():any => {
+      setTitle(TitleMsg);
+  }, []);
+
+  function TitleMsg ():any {
+      if ( myPoint == 7 ) {
+          return (<>반박불가 찐리얼 팬</>);
+      } else if ( myPoint >= 6 ) {
+          return (<>이 정도면 과몰입 팬</>);
+      } else if ( myPoint >= 5 ) {
+          return (<>아슬아슬 과몰입의 경계</>);
+      } else if ( myPoint >= 3 ) {
+          return (<>팬인 것 같지만</>);
+      } else if ( myPoint >= 0 ) {
+          return (<>평범한 시민</>);
+      }
+  };
+
   return (
     <Wrap>
       <Header>
-        <HeaderWrap>
-          <PointTxt>{myPoint}</PointTxt>
-          <>정답 수</>
-        </HeaderWrap>
+        <Title>{title}</Title>
       </Header>
       <Contents>
         <ResultContents />
@@ -36,37 +52,37 @@ function Result() {
 }
 
 // animation
-const sizeUp = keyframes`
+const sizeUp58 = keyframes`
     0% { font-size: 16px };
-    100% { font-size: 90px };
+    100% { font-size: 58px };
+`;
+const sizeUp43 = keyframes`
+    0% { font-size: 16px };
+    100% { font-size: 43px };
 `;
 
 const Wrap = styled.section`
   font-family: 'Pretendard';
 `;
 const Header = styled.header`
-  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16vh;
   background: ${PALLETS.GREEN};
 `;
-const HeaderWrap = styled.section`
-  display: flex;
-  margin: 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  width: 768px;
-  height: 20vh;
-  color: ${PALLETS.BLACK};
-  font-size: 19px;
-  text-align: center;
-  @media screen and (max-width: ${WIDTH.TAB}) {
-    width: 100%;
-  }
-`;
-const PointTxt = styled.span`
-  display: block;
-  margin: 10px 0;
-  font-weight: 700;
-  animation: ${sizeUp} 0.8s forwards;
+const Title = styled.h3`
+    display: block;
+    font-weight: 700;
+    color: ${PALLETS.BLACK};
+    word-break: keep-all;
+    text-align: center;
+    font-family: 'KNPSB';
+    animation: ${sizeUp58} 0.8s forwards;
+    @media screen and (max-width: ${WIDTH.TAB}) {
+      font-size: 43px;
+      animation: ${sizeUp43} 0.8s forwards;
+    }
 `;
 const Contents = styled.main`
   display: block;
@@ -87,7 +103,7 @@ const SubmitButton = styled.a`
   cursor: pointer;
   display: flex;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 25px;
   width: 160px;
   height: 47px;
   background-color: ${PALLETS.WHITE};

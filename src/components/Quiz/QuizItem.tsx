@@ -79,7 +79,7 @@ const ItemWrap = styled.div`
   align-items: center;
   font-family: 'Pretendard';
   @media screen and (max-width: ${WIDTH.TAB}) {
-    height: 660px;
+    height: 640px;
   }
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
-import { PALLETS } from '../../constants';
+import { PALLETS, WIDTH } from '../../constants';
 
 const Question = ({ question, data, randList }: any) => {
   if (question >= 0 && question < 2) {
@@ -42,12 +42,13 @@ const Question = ({ question, data, randList }: any) => {
       <>
         <AudioWrap>
           <ReactAudioPlayer
-            style={{ width: '140px' }}
+            style={{ width: '190px' }}
             src={
               data[question % 4].tracks.items[randList[question % 4]]
                 .preview_url
             }
             onPlay={playSong}
+            onEnded={endSong}
             autoPlay={false}
             controls
           />
@@ -64,10 +65,11 @@ const Question = ({ question, data, randList }: any) => {
 const playSong = (e: any) => {
   setTimeout(() => {
     e.target.currentTime = 9999999;
-  }, 380);
+  }, 490);
 };
-
-export default Question;
+const endSong = (e: any) => {
+  e.target.currentTime = 0;
+};
 
 const AlbumWrap = styled.div`
   position: relative;
@@ -75,6 +77,10 @@ const AlbumWrap = styled.div`
   height: 300px;
   border-radius: 5px;
   overflow: hidden;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 260px;
+    height: 260px;
+  }
 `;
 
 const AlbumImg = styled.img`
@@ -82,6 +88,10 @@ const AlbumImg = styled.img`
   height: 300px;
   border-radius: 5px;
   object-fit: cover;
+  @media screen and (max-width: ${WIDTH.TAB}) {
+    width: 260px;
+    height: 260px;
+  }
 `;
 const AlbumNameTxt = styled.p`
   position: absolute;
@@ -133,3 +143,5 @@ const ItemTxt = styled.p`
 const QuizWrap = styled.article`
   text-align: center;
 `;
+
+export default Question;

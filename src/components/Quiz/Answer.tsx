@@ -251,11 +251,10 @@ const ItemBtn = styled.button`
   cursor: pointer;
   position: relative;
   margin: 0 12px;
-  padding: 0 7px;
-  height: 50px;
+  height: 53px;
   flex: 1;
   background-color: ${PALLETS.WHITE};
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 500;
   font-family: 'Pretendard';
   border: none;
@@ -264,6 +263,7 @@ const ItemBtn = styled.button`
   -webkit-appearance: none;
   -webkit-text-fill-color: ${PALLETS.BLACK};
   transition: all 0.3s;
+  box-sizing: border-box;
   &:hover {
     background-color: ${PALLETS.GREEN};
     color: ${PALLETS.BLACK};
